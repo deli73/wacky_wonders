@@ -1,10 +1,8 @@
 package xyz.sunrose.wacky_wonders.items;
 
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
-import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -24,7 +22,7 @@ public class WackyItems {
 
 
 	public static void init() {
-		//model predicate bullshit
+		// model predicate bullshit
 		ModelPredicateProviderRegistry.register(
 				SPRING_BOXER, new Identifier("pull"), (stack, world, entity, seed) -> {
 					if (entity == null) {

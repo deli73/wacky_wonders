@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Predicate;
 
 public class TargetUtils {
-	// we don't know exactly how this works but it probably does??
+	// we don't know exactly how this works but it does, so fuck it
 	public static @Nullable Entity getTarget(Entity entity, double maxDistance){
 		Vec3d eyePos = entity.getEyePos();
 		Vec3d rotation = entity.getRotationVec(1.0F).multiply(maxDistance);
@@ -28,6 +28,7 @@ public class TargetUtils {
 		return eyePos.squaredDistanceTo(hit.getPos()) > distSquared ? null : hit.getEntity();
 	}
 
+	// yeet function
 	public static void knockback(Entity attacker, LivingEntity target, int strength) {
 		target.takeKnockback(
 				strength,

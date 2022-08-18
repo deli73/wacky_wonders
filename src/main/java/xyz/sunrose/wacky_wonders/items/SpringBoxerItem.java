@@ -16,6 +16,8 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import xyz.sunrose.wacky_wonders.TargetUtils;
@@ -26,6 +28,7 @@ public class SpringBoxerItem extends Item {
 	private static final float CHARGE_PERCENT_START_CHARGING_SOUND = 0.2F;
 	private static final float CHARGE_PERCENT_MID_CHARGE_SOUND = 0.5F;
 	private static final int KNOCKBACK_STRENGTH = 3;
+	private static final double SELF_LAUNCH_MULTIPLIER = 1.25;
 	private boolean charged = false;
 	private boolean loaded = false;
 
@@ -43,25 +46,25 @@ public class SpringBoxerItem extends Item {
 				this.charged = false;
 				this.loaded = false;
 				user.setCurrentHand(hand);
-				return TypedActionResult.consume(stack);
 			}
 
 			return TypedActionResult.fail(stack);
 		}
 	}
 
-
-
 	private boolean fire(World world, PlayerEntity user, Hand hand, ItemStack stack) {
 		// do knockback if applicable
-		boolean hits = false;
+		BlockPos soundSpot = user.getBlockPos();
 		@Nullable Entity target = TargetUtils.getTarget(user, 4.5);
 		if (target instanceof LivingEntity entity) {
 			TargetUtils.knockback(user, entity, KNOCKBACK_STRENGTH);
-			world.playSound(user, entity.getBlockPos(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS,
-					1.0F, 1.0F / (world.random.nextFloat() * 0.5F + 1.8F)+0.7F
-			);
-			hits = true;
+			soundSpot = entity.getBlockPos();
+		} else if (target == null && user.getPitch() > 45) {
+			Vec3d rotation = user.getRotationVec(1F);
+			rotation.multiply(KNOCKBACK_STRENGTH * SELF_LAUNCH_MULTIPLIER);
+			user.addVelocity(-rotation.x, -rotation.y, -rotation.z);
+		} else {
+			return false;
 		}
 
 		// update stats
@@ -69,7 +72,11 @@ public class SpringBoxerItem extends Item {
 			player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 		}
 
-		return hits;
+		// play sound
+		world.playSound(user, soundSpot, SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS,
+				1.0F, 1.0F / (world.random.nextFloat() * 0.5F + 1.8F)+0.7F
+		);
+		return true;
 	}
 
 	// == FROM CROSSBOW CODE ==
