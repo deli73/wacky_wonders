@@ -35,8 +35,7 @@ public class SpringBoxerItem extends Item {
 
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 		ItemStack stack = user.getStackInHand(hand);
-		if(isCharged(stack)){
-			fire(world, user, hand, stack);
+		if(isCharged(stack) && fire(world, user, hand, stack)){
 			setCharged(stack, false);
 			return TypedActionResult.consume(stack);
 		} else {
@@ -44,28 +43,33 @@ public class SpringBoxerItem extends Item {
 				this.charged = false;
 				this.loaded = false;
 				user.setCurrentHand(hand);
+				return TypedActionResult.consume(stack);
 			}
 
-			return TypedActionResult.consume(stack);
+			return TypedActionResult.fail(stack);
 		}
 	}
 
 
 
-	private void fire(World world, PlayerEntity user, Hand hand, ItemStack stack) {
+	private boolean fire(World world, PlayerEntity user, Hand hand, ItemStack stack) {
 		// do knockback if applicable
+		boolean hits = false;
 		@Nullable Entity target = TargetUtils.getTarget(user, 4.5);
 		if (target instanceof LivingEntity entity) {
 			TargetUtils.knockback(user, entity, KNOCKBACK_STRENGTH);
 			world.playSound(user, entity.getBlockPos(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS,
 					1.0F, 1.0F / (world.random.nextFloat() * 0.5F + 1.8F)+0.7F
 			);
+			hits = true;
 		}
 
 		// update stats
 		if (user instanceof ServerPlayerEntity player) {
 			player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 		}
+
+		return hits;
 	}
 
 	// == FROM CROSSBOW CODE ==

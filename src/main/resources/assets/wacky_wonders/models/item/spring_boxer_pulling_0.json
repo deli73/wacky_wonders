@@ -1,0 +1,18 @@
+{
+  "parent": "wacky_wonders:item/spring_boxer",
+  "textures": {
+    "layer0": "wacky_wonders:item/spring_boxer_pulling_0"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [ -90, 0, -55 ],
+      "translation": [ 1.13, 4.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ -90, 0, 35 ],
+      "translation": [ 1.13, 4.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    }
+  }
+}

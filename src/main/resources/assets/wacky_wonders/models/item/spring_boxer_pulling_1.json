@@ -1,0 +1,6 @@
+{
+  "parent": "wacky_wonders:item/spring_boxer_pulling_0",
+  "textures": {
+    "layer0": "wacky_wonders:item/spring_boxer_pulling_1"
+  }
+}
