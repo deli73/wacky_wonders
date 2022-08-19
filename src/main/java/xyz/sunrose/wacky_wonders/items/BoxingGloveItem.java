@@ -23,35 +23,46 @@ import java.util.UUID;
 
 public class BoxingGloveItem extends Item {
 	//generated with a fair website, guarunteed to be random
-	private static final UUID GLOVE_KNOCKBACK_RESISTANCE_UUID = UUID.fromString("B56F9362-1FA4-11ED-861D-0242AC120002");
+	private static final UUID[] GLOVE_KNOCKBACK_RESISTANCE_UUIDS = {
+			UUID.fromString("B56F9362-1FA4-11ED-861D-0242AC120002"),
+			UUID.fromString("70B93648-1FC6-11ED-861D-0242AC120002")
+	};
 	private static final UUID GLOVE_KNOCKBACK_UUID = UUID.fromString("9D2CDD92-1FAD-11ED-861D-0242AC120002");
 
-	private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
+	private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiersMainhand;
+	private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiersOffhand;
 
 	protected static final float ATTACK_SPEED = -1.5f;
 
 	public BoxingGloveItem(Settings settings) {
 		super(settings);
 		// boxing gloves set your attack damage to 0, increase your knockback resistance, and set your attack speed to the one above
-		ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(
+		ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> mainhandBuilder = ImmutableMultimap.builder();
+		ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> offhandBuilder = ImmutableMultimap.builder();
+		mainhandBuilder.put(
 				EntityAttributes.GENERIC_ATTACK_DAMAGE,
 				new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon Modifier", -1, EntityAttributeModifier.Operation.ADDITION)
 		);
-		builder.put(
+		mainhandBuilder.put(
 				EntityAttributes.GENERIC_ATTACK_SPEED,
 				new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon Modifier", ATTACK_SPEED, EntityAttributeModifier.Operation.ADDITION)
 		);
-		builder.put(
+		// Knockback resistance is different depending on if it's in both hands and if you're blocking
+		mainhandBuilder.put(
 				EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
-				new EntityAttributeModifier(GLOVE_KNOCKBACK_RESISTANCE_UUID, "Glove Modifier", 0.1f, EntityAttributeModifier.Operation.ADDITION)
+				new EntityAttributeModifier(GLOVE_KNOCKBACK_RESISTANCE_UUIDS[0], "Glove Modifier", 0.1f, EntityAttributeModifier.Operation.ADDITION)
+		);
+		offhandBuilder.put(
+				EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
+				new EntityAttributeModifier(GLOVE_KNOCKBACK_RESISTANCE_UUIDS[1], "Glove Modifier", 0.1f, EntityAttributeModifier.Operation.ADDITION)
 		);
 		// NOTE: ACTUAL KNOCKBACK OCCURS ELSEWHERE
-		builder.put(
+		mainhandBuilder.put(
 				EntityAttributes.GENERIC_ATTACK_KNOCKBACK,
 				new EntityAttributeModifier(GLOVE_KNOCKBACK_UUID, "Weapon Modifier", 1, EntityAttributeModifier.Operation.ADDITION)
 		);
-		this.attributeModifiers = builder.build();
+		this.attributeModifiersMainhand = mainhandBuilder.build();
+		this.attributeModifiersOffhand = offhandBuilder.build();
 	}
 
 
@@ -81,6 +92,10 @@ public class BoxingGloveItem extends Item {
 
 	@Override
 	public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-		return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
+		return switch (slot) {
+			case MAINHAND -> attributeModifiersMainhand;
+			case OFFHAND -> attributeModifiersOffhand;
+			default -> super.getAttributeModifiers(slot);
+		};
 	}
 }
