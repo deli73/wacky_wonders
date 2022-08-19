@@ -1,5 +1,6 @@
 package xyz.sunrose.wacky_wonders.items;
 
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -10,6 +11,14 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
 
 public class WackyItems {
+	public static final Item BOXING_GLOVE = Registry.register(
+			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "boxing_glove"),
+			new BoxingGloveItem(new QuiltItemSettings()
+					.group(ItemGroup.COMBAT)
+					.maxCount(1)
+			)
+	);
+
 	public static final Identifier SPRING_BOXER_ID = new Identifier(WackyWhimsicalWonders.MODID, "spring_boxer");
 	public static final Item SPRING_BOXER = Registry.register(
 			Registry.ITEM, SPRING_BOXER_ID,

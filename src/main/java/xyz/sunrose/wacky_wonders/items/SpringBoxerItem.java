@@ -1,5 +1,7 @@
 package xyz.sunrose.wacky_wonders.items;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SideShapeType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -16,6 +18,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -25,10 +28,18 @@ import xyz.sunrose.wacky_wonders.TargetUtils;
 public class SpringBoxerItem extends Item {
 	private static final String CHARGED_KEY = "Charged";
 	private static final int MAX_CHARGE_DURATION = 25;
-	private static final float CHARGE_PERCENT_START_CHARGING_SOUND = 0.2F;
-	private static final float CHARGE_PERCENT_MID_CHARGE_SOUND = 0.5F;
+	private static final float CHARGE_PERCENT_START_CHARGING_SOUND = 0.2f;
+	private static final float CHARGE_PERCENT_MID_CHARGE_SOUND = 0.5f;
 	private static final int KNOCKBACK_STRENGTH = 3;
-	private static final double SELF_LAUNCH_MULTIPLIER = 1.25;
+
+	private static final double SELF_LAUNCH_RANGE = 3;
+	private static final double SELF_LAUNCH_STRENGTH = 1;
+	private static final double SELF_LAUNCH_PUNCH_MULTIPLIER = 1d/6;
+	// vertical self-launch heights:
+	// PUNCH 0 -> ~5      blocks
+	// PUNCH 1 -> ~6 +7/8 blocks
+	// PUNCH 2 -> ~8 +6/8 blocks
+
 	private boolean charged = false;
 	private boolean loaded = false;
 
@@ -55,14 +66,23 @@ public class SpringBoxerItem extends Item {
 	private boolean fire(World world, PlayerEntity user, Hand hand, ItemStack stack) {
 		// do knockback if applicable
 		BlockPos soundSpot = user.getBlockPos();
+		int punchLevel = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
 		@Nullable Entity target = TargetUtils.getTarget(user, 4.5);
+		@Nullable BlockHitResult blockHit = TargetUtils.blockTarget(user, SELF_LAUNCH_RANGE);
 		if (target instanceof LivingEntity entity) {
-			TargetUtils.knockback(user, entity, KNOCKBACK_STRENGTH);
+			TargetUtils.knockback(user, entity,
+					KNOCKBACK_STRENGTH + punchLevel
+			);
 			soundSpot = entity.getBlockPos();
-		} else if (target == null && user.getPitch() > 45) {
-			Vec3d rotation = user.getRotationVec(1F);
-			rotation.multiply(KNOCKBACK_STRENGTH * SELF_LAUNCH_MULTIPLIER);
-			user.addVelocity(-rotation.x, -rotation.y, -rotation.z);
+		} else if (target == null && user.isOnGround() && blockHit != null) {
+			BlockState state = world.getBlockState(blockHit.getBlockPos());
+			if (!state.getCollisionShape( world, blockHit.getBlockPos() ).isEmpty()) {
+				Vec3d rotation = user.getRotationVec(1F).normalize();
+				Vec3d launch = rotation.multiply(SELF_LAUNCH_STRENGTH + punchLevel * SELF_LAUNCH_PUNCH_MULTIPLIER);
+				user.addVelocity(-launch.x, -launch.y, -launch.z);
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -72,11 +92,22 @@ public class SpringBoxerItem extends Item {
 			player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 		}
 
+		// damage item
+		stack.damage(1, user, e -> e.sendToolBreakStatus(hand));
+
 		// play sound
 		world.playSound(user, soundSpot, SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS,
 				1.0F, 1.0F / (world.random.nextFloat() * 0.5F + 1.8F)+0.7F
 		);
 		return true;
+	}
+
+	// == ENCHANTMENT ==
+
+
+	@Override
+	public int getEnchantability() {
+		return 11;
 	}
 
 	// == FROM CROSSBOW CODE ==
