@@ -42,7 +42,7 @@ public class TargetUtils {
 	}
 
 	// yeet function
-	public static void knockback(Entity attacker, LivingEntity target, int strength) {
+	public static void knockback(Entity attacker, LivingEntity target, double strength) {
 		target.takeKnockback(
 				strength,
 				MathHelper.sin(attacker.getYaw() * (float) (Math.PI / 180.0)),

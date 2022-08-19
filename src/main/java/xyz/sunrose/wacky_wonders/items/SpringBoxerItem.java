@@ -5,7 +5,9 @@ import net.minecraft.block.SideShapeType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,10 +17,12 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -63,7 +67,7 @@ public class SpringBoxerItem extends Item {
 		}
 	}
 
-	private boolean fire(World world, PlayerEntity user, Hand hand, ItemStack stack) {
+	private static boolean fire(World world, PlayerEntity user, Hand hand, ItemStack stack) {
 		// do knockback if applicable
 		BlockPos soundSpot = user.getBlockPos();
 		int punchLevel = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
@@ -100,6 +104,28 @@ public class SpringBoxerItem extends Item {
 				1.0F, 1.0F / (world.random.nextFloat() * 0.5F + 1.8F)+0.7F
 		);
 		return true;
+	}
+
+	// == CALLBACK FOR ARMORSTAND OVERRIDE == fixme: this causes a desync currently lmao
+	public static ActionResult onPlayerUse(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+
+		if(entity instanceof ArmorStandEntity armorStand && !armorStand.hasNoGravity()) {
+			ItemStack stack = player.getStackInHand(hand);
+			if (stack.getItem() == WackyItems.SPRING_BOXER) {
+				if (player.isSpectator()) {return ActionResult.PASS;}
+				if(isCharged(stack) && fire(world, player, hand, stack)){
+					setCharged(stack, false);
+					return TypedActionResult.consume(stack).getResult();
+				} else {
+					if (!isCharged(stack)) {
+						player.setCurrentHand(hand);
+					}
+
+					return TypedActionResult.fail(stack).getResult();
+				}
+			}
+		}
+		return ActionResult.PASS;
 	}
 
 	// == ENCHANTMENT ==

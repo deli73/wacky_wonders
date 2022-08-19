@@ -11,15 +11,12 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import xyz.sunrose.wacky_wonders.TargetUtils;
 
 import java.util.UUID;
@@ -52,13 +49,17 @@ public class BoxingGloveItem extends Item {
 		// NOTE: ACTUAL KNOCKBACK OCCURS ELSEWHERE
 		builder.put(
 				EntityAttributes.GENERIC_ATTACK_KNOCKBACK,
-				new EntityAttributeModifier(GLOVE_KNOCKBACK_UUID, "Weapon Modifier", 2, EntityAttributeModifier.Operation.ADDITION)
+				new EntityAttributeModifier(GLOVE_KNOCKBACK_UUID, "Weapon Modifier", 1, EntityAttributeModifier.Operation.ADDITION)
 		);
 		this.attributeModifiers = builder.build();
 	}
 
 
 	public static ActionResult onPlayerAttack(PlayerEntity player, World world, Hand hand, Entity entity, EntityHitResult hitResult) {
+		if (player.isSpectator() || world.isClient) {
+			return ActionResult.PASS;
+		}
+
 		// apply knockback if applicable
 		if(player.getStackInHand(hand).getItem() == WackyItems.BOXING_GLOVE && entity instanceof LivingEntity target){
 			TargetUtils.knockback(player, target, 1);

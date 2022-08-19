@@ -11,6 +11,13 @@ import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
 
 public class WackyItems {
+	public static final Item SPRING = Registry.register(
+			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "spring"),
+			new Item(new QuiltItemSettings()
+					.group(ItemGroup.MATERIALS)
+			)
+	);
+
 	public static final Item BOXING_GLOVE = Registry.register(
 			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "boxing_glove"),
 			new BoxingGloveItem(new QuiltItemSettings()
