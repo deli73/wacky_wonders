@@ -59,6 +59,7 @@ public class WrenchItem extends Item implements Vanishable {
 				access.setCookTime(currentCookTime + diff);
 				furnace.markDirty();
 				world.playSound(playerEntity, blockPos, SoundEvents.BLOCK_SMITHING_TABLE_USE, SoundCategory.PLAYERS, 1f, 1.2f);
+				playerEntity.resetLastAttackedTicks();
 				return ActionResult.SUCCESS;
 			}
 		} else if (blockEntity instanceof WrenchBoostable boostable) { //boost any blocks that support the wrench boosting API
