@@ -1,6 +1,8 @@
 package xyz.sunrose.wacky_wonders;
 
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.advancement.criterion.UseItemCriterion;
@@ -14,6 +16,7 @@ import xyz.sunrose.wacky_wonders.blocks.WackyBlocks;
 import xyz.sunrose.wacky_wonders.items.BoxingGloveItem;
 import xyz.sunrose.wacky_wonders.items.SpringBoxerItem;
 import xyz.sunrose.wacky_wonders.items.WackyItems;
+import xyz.sunrose.wacky_wonders.items.WrenchItem;
 
 public class WackyWhimsicalWonders implements ModInitializer {
 	public static final String MODID = "wacky_wonders";
@@ -28,5 +31,6 @@ public class WackyWhimsicalWonders implements ModInitializer {
 		// Events
 		AttackEntityCallback.EVENT.register(BoxingGloveItem::onPlayerAttack);
 		//UseEntityCallback.EVENT.register(SpringBoxerItem::onPlayerUse);
+		AttackBlockCallback.EVENT.register(WrenchItem::onAttackBlock);
 	}
 }

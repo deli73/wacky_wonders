@@ -11,6 +11,7 @@ import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Vanishable;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -29,7 +30,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import xyz.sunrose.wacky_wonders.TargetUtils;
 
-public class SpringBoxerItem extends Item {
+public class SpringBoxerItem extends Item implements Vanishable {
 	private static final String CHARGED_KEY = "Charged";
 	private static final int MAX_CHARGE_DURATION = 25;
 	private static final float CHARGE_PERCENT_START_CHARGING_SOUND = 0.2f;

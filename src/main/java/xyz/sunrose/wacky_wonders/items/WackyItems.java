@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -33,6 +34,14 @@ public class WackyItems {
 					.group(ItemGroup.COMBAT)
 					.maxDamage(200)
 					.rarity(Rarity.UNCOMMON)
+			)
+	);
+
+	public static final Item WRENCH = Registry.register(
+			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "wrench"),
+			new WrenchItem(new QuiltItemSettings()
+					.group(ItemGroup.TOOLS)
+					.maxDamage(ToolMaterials.IRON.getDurability())
 			)
 	);
 

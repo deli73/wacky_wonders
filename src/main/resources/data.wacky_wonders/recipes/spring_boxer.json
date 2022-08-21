@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B",
+    "S",
+    "h"
+  ],
+  "key": {
+    "B": {
+      "item": "wacky_wonders:boxing_glove"
+    },
+    "S": {
+      "item": "wacky_wonders:spring"
+    },
+    "h": {
+      "item": "minecraft:tripwire_hook"
+    }
+  },
+  "result": {
+    "item": "wacky_wonders:spring_boxer",
+    "count": 1
+  }
+}

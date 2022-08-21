@@ -11,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.Vanishable;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -21,7 +22,7 @@ import xyz.sunrose.wacky_wonders.TargetUtils;
 
 import java.util.UUID;
 
-public class BoxingGloveItem extends Item {
+public class BoxingGloveItem extends Item implements Vanishable {
 	//generated with a fair website, guarunteed to be random
 	private static final UUID[] GLOVE_KNOCKBACK_RESISTANCE_UUIDS = {
 			UUID.fromString("B56F9362-1FA4-11ED-861D-0242AC120002"),
