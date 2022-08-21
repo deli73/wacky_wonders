@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "lib39:discovered_via": "minecraft:red_wool",
   "pattern": [
     " # ",
     "#S#"

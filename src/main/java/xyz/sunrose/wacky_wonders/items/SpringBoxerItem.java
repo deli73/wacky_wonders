@@ -1,5 +1,6 @@
 package xyz.sunrose.wacky_wonders.items;
 
+import com.unascribed.lib39.recoil.api.DirectClickItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SideShapeType;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -30,7 +31,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import xyz.sunrose.wacky_wonders.TargetUtils;
 
-public class SpringBoxerItem extends Item implements Vanishable {
+public class SpringBoxerItem extends Item implements Vanishable, DirectClickItem {
 	private static final String CHARGED_KEY = "Charged";
 	private static final int MAX_CHARGE_DURATION = 25;
 	private static final float CHARGE_PERCENT_START_CHARGING_SOUND = 0.2f;
@@ -107,8 +108,27 @@ public class SpringBoxerItem extends Item implements Vanishable {
 		return true;
 	}
 
-	// == CALLBACK FOR ARMORSTAND OVERRIDE == fixme: this causes a desync currently lmao
-	public static ActionResult onPlayerUse(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+	@Override
+	public ActionResult onDirectAttack(PlayerEntity player, Hand hand) {
+		return ActionResult.PASS;
+	}
+
+	@Override
+	public ActionResult onDirectUse(PlayerEntity player, Hand hand) {
+		Entity hit = TargetUtils.getTarget(player, 4.5);
+		if (hit instanceof ArmorStandEntity armorStand && isCharged(player.getStackInHand(hand))) {
+			if (player.world.isClient && !armorStand.hasNoGravity()){
+				player.playSound(SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS,
+						1.0F, 1.0F / (player.world.random.nextFloat() * 0.5F + 1.8F)+0.7F);
+				return ActionResult.SUCCESS;
+			}
+			return onPlayerUse(player, player.getWorld(), hand, hit);
+		}
+		return ActionResult.PASS;
+	}
+
+	// == CALLBACK FOR ARMORSTAND OVERRIDE == fixme: use lib39:Recoil to allow for armorstand punching instead?
+	public static ActionResult onPlayerUse(PlayerEntity player, World world, Hand hand, Entity entity) {
 
 		if(entity instanceof ArmorStandEntity armorStand && !armorStand.hasNoGravity()) {
 			ItemStack stack = player.getStackInHand(hand);
@@ -213,5 +233,4 @@ public class SpringBoxerItem extends Item implements Vanishable {
 	public boolean isUsedOnRelease(ItemStack stack) {
 		return stack.isOf(this);
 	}
-
 }

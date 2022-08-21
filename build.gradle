@@ -37,6 +37,9 @@ dependencies {
 	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
 
 	modApi include("com.unascribed:lib39-lockpick:1.1.10")
+	modApi include("com.unascribed:lib39-dessicant:1.1.10")
+	modApi include("com.unascribed:lib39-ripple:1.1.10")
+	modApi include("com.unascribed:lib39-recoil:1.1.10")
 }
 
 processResources {

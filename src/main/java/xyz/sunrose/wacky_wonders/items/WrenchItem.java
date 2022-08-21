@@ -2,7 +2,9 @@ package xyz.sunrose.wacky_wonders.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EquipmentSlot;
@@ -11,6 +13,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Vanishable;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -18,6 +21,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import xyz.sunrose.wacky_wonders.api.WrenchBoostable;
 import xyz.sunrose.wacky_wonders.mixins.AccessorAbstractFurnaceBlockEntity;
@@ -65,6 +69,16 @@ public class WrenchItem extends Item implements Vanishable {
 		} else if (blockEntity instanceof WrenchBoostable boostable) { //boost any blocks that support the wrench boosting API
 			return boostable.accelerate(TICKS_ADDED) ? ActionResult.SUCCESS : ActionResult.PASS;
 		}
+		return ActionResult.PASS;
+	}
+
+	@Override
+	public ActionResult useOnBlock(ItemUsageContext context) {
+		BlockPos pos = context.getBlockPos();
+		BlockState state = context.getWorld().getBlockState(pos);
+		Vec3d hitPos = context.getHitPos();
+		PlayerEntity player = context.getPlayer();
+
 		return ActionResult.PASS;
 	}
 
