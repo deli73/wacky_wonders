@@ -16,6 +16,15 @@ public class WackyEntities {
 					.build("fruit_bomb")
 	);
 
+	public static final EntityType<SmokeBombEntity> SMOKE_BOMB_ENTITY_TYPE = Registry.register(
+			Registry.ENTITY_TYPE, new Identifier(WackyWhimsicalWonders.MODID, "smoke_bomb"),
+			EntityType.Builder.<SmokeBombEntity>create(SmokeBombEntity::new, SpawnGroup.MISC)
+					.setDimensions(0.25F, 0.25F)
+					.maxTrackingRange(4)
+					.trackingTickInterval(10)
+					.build("smoke_bomb")
+	);
+
 	public static void init() {
 
 	}

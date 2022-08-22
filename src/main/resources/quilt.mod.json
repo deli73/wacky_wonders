@@ -21,7 +21,7 @@
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
 			"init": "xyz.sunrose.wacky_wonders.WackyWhimsicalWonders",
-			"client_init": "xyz.sunrose.wacky_wonders.WackyWhimsicalWondersClient"
+			"client_init": "xyz.sunrose.wacky_wonders.client.WackyWhimsicalWondersClient"
 		},
 		"depends": [
 			{

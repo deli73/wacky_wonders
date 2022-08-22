@@ -1,4 +1,4 @@
-package xyz.sunrose.wacky_wonders;
+package xyz.sunrose.wacky_wonders.client;
 
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
@@ -10,7 +10,10 @@ public class WackyWhimsicalWondersClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient(ModContainer mod) {
 		EntityRendererRegistry.register(
-				WackyEntities.FRUIT_BOMB_ENTITY_TYPE, FlyingItemEntityRenderer::new
+				WackyEntities.FRUIT_BOMB_ENTITY_TYPE, GlowingFlyingItemEntityRenderer::new
+		);
+		EntityRendererRegistry.register(
+				WackyEntities.SMOKE_BOMB_ENTITY_TYPE, FlyingItemEntityRenderer::new
 		);
 	}
 }
