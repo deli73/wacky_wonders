@@ -45,6 +45,14 @@ public class WackyItems {
 			)
 	);
 
+	public static final Item FRUIT_BOMB = Registry.register(
+			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "fruit_bomb"),
+			new FruitBombItem(new QuiltItemSettings()
+					.group(ItemGroup.COMBAT)
+					.maxCount(16)
+			)
+	);
+
 
 	public static void init() {
 		// model predicate bullshit

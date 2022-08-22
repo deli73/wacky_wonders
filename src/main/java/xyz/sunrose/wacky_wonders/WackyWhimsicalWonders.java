@@ -15,6 +15,7 @@ import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.sunrose.wacky_wonders.blocks.WackyBlocks;
+import xyz.sunrose.wacky_wonders.entities.WackyEntities;
 import xyz.sunrose.wacky_wonders.items.BoxingGloveItem;
 import xyz.sunrose.wacky_wonders.items.SpringBoxerItem;
 import xyz.sunrose.wacky_wonders.items.WackyItems;
@@ -33,7 +34,7 @@ public class WackyWhimsicalWonders implements ModInitializer {
 		SplashTextRegistry.registerStatic(
 				"Cartoon logic!", "Spring-loaded!", "Yeetable!", "Stimmy!", "Hackable!", "Wacky!", "Whimsical!",
 				"Lathes are dangerous!", "First-order retrievabiity!", "Myth BUSTED", "Engineering!",
-				"Also try Raft!", "Also try Marble It Up!", "Also try Hyperbolica!", "Alsy try Garry's Mod!"
+				"Also try Raft!", "Also try Marble It Up!", "Also try Hyperbolica!", "Also try Garry's Mod!"
 		);
 		SplashTextRegistry.replace("Conventional!", "Unconventional!");
 		SplashTextRegistry.replace("Absolutely no memes!", "Slightly more memes than advertised!");
@@ -41,6 +42,7 @@ public class WackyWhimsicalWonders implements ModInitializer {
 		//initialize blocks and items
 		WackyBlocks.init();
 		WackyItems.init();
+		WackyEntities.init();
 
 		// register Events
 		AttackEntityCallback.EVENT.register(BoxingGloveItem::onPlayerAttack);

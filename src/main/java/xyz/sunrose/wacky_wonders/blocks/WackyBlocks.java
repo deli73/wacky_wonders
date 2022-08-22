@@ -22,7 +22,7 @@ public class WackyBlocks {
 	public static final Item MACHINING_TABLE_ITEM = Registry.register(
 			Registry.ITEM, MACHINING_TABLE_ID,
 			new BlockItem(MACHINING_TABLE, new QuiltItemSettings()
-					.group(ItemGroup.DECORATIONS)
+					//.group(ItemGroup.DECORATIONS)
 			)
 	);
 	public static final BlockEntityType<MachiningTableBlockEntity> MACHINING_TABLE_ENTITY_TYPE = Registry.register(

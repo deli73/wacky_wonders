@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "lib39:discovered_via": "minecraft:stonecutter",
+  "pattern": [
+    "#SG",
+    "iRi",
+    "OOO"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "S": {
+      "item": "minecraft:stonecutter"
+    },
+    "G": {
+      "item": "minecraft:grindstone"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "O": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "result": {
+    "item": "wacky_wonders:machining_table",
+    "count": 1
+  }
+}

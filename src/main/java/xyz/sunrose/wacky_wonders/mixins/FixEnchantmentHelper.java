@@ -18,7 +18,7 @@ import java.util.List;
 public class FixEnchantmentHelper {
 	@Inject(method = "getPossibleEntries",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;isTreasure()Z"),
-			locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = false, require = 0
+			locals = LocalCapture.CAPTURE_FAILSOFT, require = 0
 	)
 	private static void fixPossibleEntires(int power, ItemStack stack, boolean treasureAllowed, CallbackInfoReturnable<List<EnchantmentLevelEntry>> cir,
 										   List<EnchantmentLevelEntry> list, Item item, boolean bl, Iterator<Enchantment> var6, Enchantment enchantment)

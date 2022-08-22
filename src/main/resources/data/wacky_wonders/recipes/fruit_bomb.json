@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "lib39:discovered_via": "minecraft:gunpowder",
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "item": "wacky_wonders:fruit_bomb",
+    "count": 1
+  }
+}
