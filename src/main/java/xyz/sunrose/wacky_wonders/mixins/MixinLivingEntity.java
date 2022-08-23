@@ -14,9 +14,9 @@ import java.util.Map;
 
 @Mixin(LivingEntity.class)
 public class MixinLivingEntity {
-	static double BLINDNESS_FACTOR = 0.1; // percentage of attack range a mob retains when blind
+	private static final double BLINDNESS_FACTOR = 0.1; // percentage of attack range a mob retains when blind
 
-	@Inject(method = "getAttackDistanceScalingFactor", at=@At(value = "TAIL"))
+	@Inject(method = "getAttackDistanceScalingFactor", at=@At(value = "TAIL"), cancellable = true)
 	private void injectAttackDistance(Entity entity, CallbackInfoReturnable<Double> cir){
 		if(entity instanceof LivingEntity living) {
 			Map<StatusEffect, StatusEffectInstance> effects = living.getActiveStatusEffects();
