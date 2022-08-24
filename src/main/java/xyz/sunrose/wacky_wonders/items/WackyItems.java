@@ -1,15 +1,24 @@
 package xyz.sunrose.wacky_wonders.items;
 
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.Position;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
+import xyz.sunrose.wacky_wonders.entities.FruitBombEntity;
+import xyz.sunrose.wacky_wonders.entities.SmokeBombEntity;
 
 public class WackyItems {
 	public static final Item SPRING = Registry.register(
@@ -63,7 +72,25 @@ public class WackyItems {
 
 
 	public static void init() {
-		// model predicate bullshit
+		// == ITEM BEHAVIORS ==
+		DispenserBlock.registerBehavior(SMOKE_BOMB, new ProjectileDispenserBehavior() {
+			@Override
+			protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
+				return Util.make(new SmokeBombEntity(world, position.getX(), position.getY(), position.getZ()), entity -> entity.setItem(stack));
+			}
+		});
+		DispenserBlock.registerBehavior(FRUIT_BOMB, new ProjectileDispenserBehavior() {
+			@Override
+			protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
+				return Util.make(new FruitBombEntity(world, position.getX(), position.getY(), position.getZ()), entity -> entity.setItem(stack));
+			}
+		});
+
+		modelPredicates();
+	}
+
+	// model predicate bullshit
+	private static void modelPredicates() {
 		ModelPredicateProviderRegistry.register(
 				SPRING_BOXER, new Identifier("pull"), (stack, world, entity, seed) -> {
 					if (entity == null) {

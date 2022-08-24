@@ -17,7 +17,11 @@ public class FruitBombEntity extends ThrownItemEntity {
 		super(WackyEntities.FRUIT_BOMB_ENTITY_TYPE, livingEntity, world);
 	}
 
-    @Override
+	public FruitBombEntity(World world, double x, double y, double z) {
+		super(WackyEntities.FRUIT_BOMB_ENTITY_TYPE, x, y, z, world);
+	}
+
+	@Override
 	protected Item getDefaultItem() {
 		return WackyItems.FRUIT_BOMB;
 	}

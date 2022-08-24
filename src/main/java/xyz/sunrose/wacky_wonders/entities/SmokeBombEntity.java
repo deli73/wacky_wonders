@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
@@ -22,11 +23,12 @@ import xyz.sunrose.wacky_wonders.items.WackyItems;
 import java.util.List;
 
 public class SmokeBombEntity extends ThrownItemEntity {
-	private static final int PARTICLE_COUNT = 20;
+	private static final int PARTICLE_COUNT = 25;
 	private static final int BLINDNESS_DURATION = 6*20; //max(base?) blindness duration?
 	private static final float DIRECT_HIT_MULTIPLIER = 2; //factor for increased time if entity is hit directly
-	private static final double RADIUS = 5; //blinding and particle range in blocks
-	private static final double PARTICLE_VELOCITY_MULTIPLIER = 0.01;
+	private static final double RADIUS = 4.5; //blinding range in blocks
+	private static final double PARTICLE_RADIUS = 3; //particle radius
+	private static final double PARTICLE_VELOCITY_MULTIPLIER = 0.05;
 
 
 	public SmokeBombEntity(EntityType<SmokeBombEntity> smokeBombEntityEntityType, World world) {
@@ -37,15 +39,20 @@ public class SmokeBombEntity extends ThrownItemEntity {
 		super(WackyEntities.SMOKE_BOMB_ENTITY_TYPE, livingEntity, world);
 	}
 
+	public SmokeBombEntity(World world, double x, double y, double z) {
+		super(WackyEntities.SMOKE_BOMB_ENTITY_TYPE, x, y, z, world);
+	}
+
 	@Override
 	protected Item getDefaultItem() {return WackyItems.SMOKE_BOMB;}
 
 	@Override
 	protected void onCollision(HitResult hitResult) {
 		super.onCollision(hitResult);
-		spawnSmoke();
 
 		if (!this.world.isClient && !this.isRemoved()) {
+			spawnSmoke((ServerWorld) this.world);
+
 			if (hitResult.getType() == HitResult.Type.ENTITY){ //ensure more powerful hit if entity hit directly
 				EntityHitResult entityHitResult = (EntityHitResult) hitResult;
 				Entity entity = entityHitResult.getEntity();
@@ -74,15 +81,13 @@ public class SmokeBombEntity extends ThrownItemEntity {
 		}
 	}
 
-	private void spawnSmoke() { // fixme: client side collision code failing Sometimes™... might be a vanilla issue thx mojang
+	private void spawnSmoke(ServerWorld serverWorld) {
 		RandomGenerator random = world.getRandom();
-		//WackyWhimsicalWonders.LOGGER.info("spawnSmoke run on "+(world.isClient ? "CLIENT" : "SERVER"));
 		for (int i = 0; i < PARTICLE_COUNT; i++) {
-			Vec3d pos = RandomHelper.randomPolar(random, this.getX(), this.getY(), this.getZ(), RADIUS, 1);
-			double xSpeed = (random.nextDouble() - 0.5) * 2;
-			double zSpeed = (random.nextDouble() - 0.5) * 2;
-			world.addImportantParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, random.nextBoolean(), pos.x, pos.y, pos.z,
-					PARTICLE_VELOCITY_MULTIPLIER * xSpeed, 0, PARTICLE_VELOCITY_MULTIPLIER * zSpeed
+			Vec3d pos = RandomHelper.randomPolar(random, this.getX(), this.getY(), this.getZ(), PARTICLE_RADIUS, 1);
+			double speed = (random.nextDouble() - 0.5) * 2;
+			serverWorld.spawnParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.x, pos.y, pos.z, 5,
+					0.5,0,0.5, speed * PARTICLE_VELOCITY_MULTIPLIER
 			);
 		}
 	}
