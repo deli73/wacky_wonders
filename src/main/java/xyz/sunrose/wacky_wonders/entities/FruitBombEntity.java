@@ -1,5 +1,6 @@
 package xyz.sunrose.wacky_wonders.entities;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -16,7 +17,7 @@ public class FruitBombEntity extends ThrownItemEntity {
 		super(WackyEntities.FRUIT_BOMB_ENTITY_TYPE, livingEntity, world);
 	}
 
-	@Override
+    @Override
 	protected Item getDefaultItem() {
 		return WackyItems.FRUIT_BOMB;
 	}
