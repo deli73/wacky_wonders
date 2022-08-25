@@ -2,9 +2,7 @@ package xyz.sunrose.wacky_wonders.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EquipmentSlot;
@@ -78,6 +76,7 @@ public class WrenchItem extends Item implements Vanishable {
 		BlockState state = context.getWorld().getBlockState(pos);
 		Vec3d hitPos = context.getHitPos();
 		PlayerEntity player = context.getPlayer();
+
 
 		return ActionResult.PASS;
 	}

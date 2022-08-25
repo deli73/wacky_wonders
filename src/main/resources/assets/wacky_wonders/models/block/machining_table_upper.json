@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "wacky_wonders:blocks/machining_table/saw",
-		"1": "wacky_wonders:blocks/machining_table/sander",
+		"0": "wacky_wonders:block/machining_table/saw",
+		"1": "wacky_wonders:block/machining_table/sander",
 		"2": "wacky_wonders:block/machining_table/cnc",
 		"particle": "wacky_wonders:blocks/machining_table/particles"
 	},

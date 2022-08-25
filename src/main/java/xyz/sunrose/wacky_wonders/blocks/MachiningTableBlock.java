@@ -13,8 +13,11 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -34,6 +37,7 @@ public class MachiningTableBlock extends BlockWithEntity {
 	private static final RotatableVoxelShape CNC_BOX_2 = new RotatableVoxelShape(11, 0, 6, 14, 8, 14);
 	private static final RotatableVoxelShape SANDER_BOX = new RotatableVoxelShape(4, 0, 11, 9, 12, 14);
 	private static final RotatableVoxelShape SAW_BOX = new RotatableVoxelShape(1, 0, 6, 3, 3, 14);
+	private static final RotatableVoxelShape ITEM_SPOT_BOX = new RotatableVoxelShape(4, 0, 4, 10, 2, 10);
 
 	protected MachiningTableBlock(Settings settings) {
 		super(settings);
@@ -45,6 +49,36 @@ public class MachiningTableBlock extends BlockWithEntity {
 		);
 	}
 
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		BlockPos entityPos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos : pos.up();
+		BlockEntity blockEntity = world.getBlockEntity(entityPos);
+		if (state.isOf(this) && blockEntity instanceof MachiningTableBlockEntity table) {
+			// if wrench, cycle recipe
+			table.cycleRecipe();
+
+			// otherwise swap items
+			ItemStack currentItem = table.getIngredient().copy();
+			ItemStack playerHolding = player.getStackInHand(hand).copy();
+			if (currentItem.isEmpty() && playerHolding.isEmpty()) return ActionResult.PASS; //don't swing arm if there's nothing to swap
+			table.setIngredient(playerHolding);
+			player.setStackInHand(hand, currentItem);
+			return ActionResult.SUCCESS;
+		}
+		return ActionResult.PASS;
+	}
+
+	@Override
+	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+		if (!state.isOf(newState.getBlock())){
+			if (state.get(HALF) == DoubleBlockHalf.UPPER){
+				BlockEntity blockEntity = world.getBlockEntity(pos);
+				if (state.isOf(this) && blockEntity instanceof MachiningTableBlockEntity table) {
+					table.dropItem(world, pos, table.getIngredient());
+				}
+			}
+		}
+	}
 
 
 	// == IMPORTANT BUT SECONDARY STUFF, MOSTLY BORROWED FROM DOOR CODE ==
@@ -130,7 +164,7 @@ public class MachiningTableBlock extends BlockWithEntity {
 	@Nullable
 	@Override
 	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		return new MachiningTableBlockEntity(pos, state);
+		return state.get(HALF) == DoubleBlockHalf.UPPER ? new MachiningTableBlockEntity(pos, state) : null;
 	}
 
 	@Override
