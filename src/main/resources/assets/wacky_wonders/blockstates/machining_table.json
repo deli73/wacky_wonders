@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,half=lower": {
+      "model": "wacky_wonders:block/machining_table"
+    },
+    "facing=east,half=lower": {
+      "model": "wacky_wonders:block/machining_table",
+      "y": 90
+    },
+    "facing=south,half=lower": {
+      "model": "wacky_wonders:block/machining_table",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "wacky_wonders:block/machining_table",
+      "y": 270
+    },
+    "facing=north,half=upper": {
+      "model": "wacky_wonders:block/machining_table_upper"
+    },
+    "facing=east,half=upper": {
+      "model": "wacky_wonders:block/machining_table_upper",
+      "y": 90
+    },
+    "facing=south,half=upper": {
+      "model": "wacky_wonders:block/machining_table_upper",
+      "y": 180
+    },
+    "facing=west,half=upper": {
+      "model": "wacky_wonders:block/machining_table_upper",
+      "y": 270
+    }
+  }
+}

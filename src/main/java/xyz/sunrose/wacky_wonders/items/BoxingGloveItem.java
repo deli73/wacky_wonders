@@ -2,7 +2,6 @@ package xyz.sunrose.wacky_wonders.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.unascribed.lib39.recoil.api.DirectClickItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -23,7 +22,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import xyz.sunrose.wacky_wonders.TargetUtils;
+import xyz.sunrose.wacky_wonders.util.TargetUtils;
 
 import java.util.List;
 import java.util.UUID;

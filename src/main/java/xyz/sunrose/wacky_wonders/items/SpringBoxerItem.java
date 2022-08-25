@@ -2,11 +2,9 @@ package xyz.sunrose.wacky_wonders.items;
 
 import com.unascribed.lib39.recoil.api.DirectClickItem;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SideShapeType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,12 +22,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import xyz.sunrose.wacky_wonders.TargetUtils;
+import xyz.sunrose.wacky_wonders.util.TargetUtils;
 
 public class SpringBoxerItem extends Item implements Vanishable, DirectClickItem {
 	private static final String CHARGED_KEY = "Charged";

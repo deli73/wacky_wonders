@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
-import xyz.sunrose.wacky_wonders.RandomHelper;
+import xyz.sunrose.wacky_wonders.util.RandomHelper;
 import xyz.sunrose.wacky_wonders.items.WackyItems;
 
 import java.util.List;
@@ -76,16 +76,15 @@ public class SmokeBombEntity extends ThrownItemEntity {
 		int final_duration = (int) (duration_base * exposure * distance_factor);
 		if (entity instanceof LivingEntity living && !entity.equals(this.getOwner())) {
 			StatusEffectInstance blindness = new StatusEffectInstance(StatusEffects.BLINDNESS, final_duration);
-			//WackyWhimsicalWonders.LOGGER.info("Applied blindness to "+entity.getType().toString()+" with duration "+final_duration);
 			living.addStatusEffect(blindness, this);
 		}
 	}
 
 	private void spawnSmoke(ServerWorld serverWorld) {
 		RandomGenerator random = world.getRandom();
-		for (int i = 0; i < PARTICLE_COUNT; i++) {
+		for (int i = 0; i < PARTICLE_COUNT; i++) { //spawn particles distributed polar-ly (???), use ServerWorld.spawnParticles for consistency
 			Vec3d pos = RandomHelper.randomPolar(random, this.getX(), this.getY(), this.getZ(), PARTICLE_RADIUS, 1);
-			double speed = (random.nextDouble() - 0.5) * 2;
+			double speed = (random.nextDouble() - 0.5) * 2; // -1 to 1 range
 			serverWorld.spawnParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.x, pos.y, pos.z, 5,
 					0.5,0,0.5, speed * PARTICLE_VELOCITY_MULTIPLIER
 			);

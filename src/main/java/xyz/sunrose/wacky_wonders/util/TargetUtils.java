@@ -1,4 +1,4 @@
-package xyz.sunrose.wacky_wonders;
+package xyz.sunrose.wacky_wonders.util;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -12,6 +12,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
+import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
 
 import java.util.function.Predicate;
 
