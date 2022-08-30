@@ -1,14 +1,10 @@
 package xyz.sunrose.wacky_wonders.items;
 
-import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolMaterials;
+import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
@@ -67,6 +63,22 @@ public class WackyItems {
 			new SmokeBombItem(new QuiltItemSettings()
 					.group(ItemGroup.COMBAT)
 					.maxCount(16)
+			)
+	);
+
+	public static final Item SPARKELITE = Registry.register(
+			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "sparkelite"),
+			new Item(new QuiltItemSettings()
+					.group(ItemGroup.MATERIALS)
+			)
+	);
+
+	public static final Item SPARKELITE_BOTTLE = Registry.register(
+			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "sparkelite_bottle"),
+			new SparkeliteBottleItem(new QuiltItemSettings()
+					.group(ItemGroup.BREWING)
+					.maxCount(4)
+					.recipeRemainder(Items.GLASS_BOTTLE)
 			)
 	);
 

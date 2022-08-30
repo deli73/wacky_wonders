@@ -34,9 +34,8 @@ public class MachiningTableRenderer<T extends BlockEntity> implements BlockEntit
 
 			// render ingredient
 			if (table.getIngredient() != null && !table.getIngredient().isEmpty()) {
-
-				ItemStack stack = table.getIngredient();
-				Vec3d north_translation = new Vec3d(9.5+3, 0, 2+3);
+				ItemStack ingredient = table.getIngredient();
+				Vec3d north_translation = new Vec3d(9.5+3, 16, 2+3);
 				Vec3d translation = rotate(north_translation, table.facing);
 				Quaternion xRotation = Vec3f.POSITIVE_X.getDegreesQuaternion(90);
 				Quaternion yRotation = Vec3f.POSITIVE_Y.getDegreesQuaternion(dirToRotation(table.facing));
@@ -47,12 +46,12 @@ public class MachiningTableRenderer<T extends BlockEntity> implements BlockEntit
 				matrices.multiply(xRotation);
 				matrices.scale(3 / 8f, 3 / 8f, 3 / 8f);
 				renderer.renderItem(
-						stack, ModelTransformation.Mode.FIXED, lightFront, OverlayTexture.DEFAULT_UV,
+						ingredient, ModelTransformation.Mode.FIXED, lightFront, OverlayTexture.DEFAULT_UV,
 						matrices, vertexConsumers, 0
 				);
 				matrices.pop();
 
-				Vec3d north_text_translation = new Vec3d(6, 0.1f, 5);
+				Vec3d north_text_translation = new Vec3d(6, 16.1f, 5);
 				Vec3d text_translation = rotate(north_text_translation, table.facing);
 				float stringX = -7.5f;
 				float stringY = -3.5f;
@@ -63,13 +62,39 @@ public class MachiningTableRenderer<T extends BlockEntity> implements BlockEntit
 				matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180.0F));
 				matrices.scale(1/64f, 1/64f, 1/64f);
 				textRenderer.draw(
-						String.format("%02d", stack.getCount()), stringX, stringY, 16777215, false, matrices.peek().getPosition(),
-						vertexConsumers, false, 0, lightFront
+						String.format("%02d", ingredient.getCount()), stringX, stringY, 16777215, false,
+						matrices.peek().getPosition(), vertexConsumers, false, 0, lightFront
 				);
 				matrices.pop();
 			}
 
-			// render recipe output
+			// render recipe output - TODO render hologram?
+			if (table.getOutput() != null && !table.getOutput().isEmpty()){
+				ItemStack output = table.getOutput();
+				Vec3d north_translation = new Vec3d(4+3, 16+1+3, 8);
+				Vec3d translation = rotate(north_translation, table.facing);
+				Quaternion rotation = Vec3f.POSITIVE_Y.getDegreesQuaternion(dirToRotation(table.facing));
+
+				matrices.push();
+				matrices.translate(translation.x, translation.y, translation.z);
+				matrices.multiply(rotation);
+				matrices.scale(3 / 8f, 3 / 8f, 3 / 8f);
+				renderer.renderItem(
+						output, ModelTransformation.Mode.FIXED, lightFront, OverlayTexture.DEFAULT_UV,
+						matrices, vertexConsumers, 0
+				);
+				matrices.pop();
+
+				Quaternion textXRotation = Vec3f.POSITIVE_X.getDegreesQuaternion(180);
+				Quaternion textYRotation = Vec3f.POSITIVE_Y.getDegreesQuaternion(dirToRotation(table.facing.getOpposite()));
+				matrices.push();
+				matrices.translate(translation.x, translation.y, translation.z);
+				matrices.multiply(textYRotation);
+				matrices.multiply(textXRotation);
+				matrices.scale(1/64f, 1/64f, 1/64f);
+				renderCount(textRenderer, output, matrices, vertexConsumers, lightFront);
+				matrices.pop();
+			}
 		}
 	}
 
@@ -85,6 +110,25 @@ public class MachiningTableRenderer<T extends BlockEntity> implements BlockEntit
 
 	private Vec3d rotate(Vec3d north, Direction direction) {
 		return RotatableVoxelShape.rotatedBox(north, north, direction)[0].multiply(1/16d);
+	}
+
+	private void renderCount(TextRenderer renderer, ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light){
+		if (stack.getCount() != 1) {
+			String string = String.valueOf(stack.getCount());
+			matrices.translate(0.0, 0.0, 0.0);
+			renderer.draw(
+					string,
+					14 - renderer.getWidth(string),
+					8,
+					16777215,
+					true,
+					matrices.peek().getPosition(),
+					vertexConsumers,
+					false,
+					0,
+					light
+			);
+		}
 	}
 
 }

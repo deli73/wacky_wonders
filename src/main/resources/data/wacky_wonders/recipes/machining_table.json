@@ -1,29 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
-  "lib39:discovered_via": "minecraft:stonecutter",
+  "lib39:discovered_via": "wacky_wonders:sparkelite",
   "pattern": [
-    "#SG",
-    "iRi",
-    "OOO"
+    " # ",
+    "iSi",
+    "XXX"
   ],
   "key": {
     "#": {
       "item": "minecraft:diamond"
     },
-    "S": {
-      "item": "minecraft:stonecutter"
-    },
-    "G": {
-      "item": "minecraft:grindstone"
-    },
     "i": {
       "item": "minecraft:iron_ingot"
     },
-    "R": {
-      "item": "minecraft:redstone"
+    "S": {
+      "item": "wacky_wonders:sparkelite"
     },
-    "O": {
-      "item": "minecraft:smooth_stone"
+    "X": {
+      "item": "minecraft:stone"
     }
   },
   "result": {

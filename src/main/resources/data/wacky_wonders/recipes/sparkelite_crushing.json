@@ -1,0 +1,8 @@
+{
+  "type": "lib39:piston_smashing",
+  "input": { "block": "minecraft:amethyst_cluster" },
+  "catalysts": { "block": "minecraft:prismarine" },
+  "output": {
+    "item": "wacky_wonders:sparkelite"
+  }
+}

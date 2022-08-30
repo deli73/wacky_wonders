@@ -40,6 +40,7 @@ dependencies {
 	modApi include("com.unascribed:lib39-dessicant:1.1.10") //for model fixes etc
 	modApi include("com.unascribed:lib39-ripple:1.1.10") //for custom splash texts
 	modApi include("com.unascribed:lib39-recoil:1.1.10") //for spring boxer usability on armor stands
+	modApi include("com.unascribed:lib39-machination:1.1.10") //for recipes
 }
 
 processResources {

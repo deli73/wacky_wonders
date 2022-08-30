@@ -26,7 +26,7 @@ public class MachiningTableBlockEntity extends BlockEntity implements WrenchBoos
 	private final String INGREDIENT_KEY = "item";
 
 	private ItemStack ingredient = ItemStack.EMPTY;
-	private List<MachiningRecipe> availableRecieps = Lists.newArrayList();
+	private List<MachiningRecipe> availableRecipes = Lists.newArrayList();
 	private int recipeIndex = 0;
 	protected @Nullable MachiningRecipe currentRecipe;
 
@@ -51,29 +51,30 @@ public class MachiningTableBlockEntity extends BlockEntity implements WrenchBoos
 	}
 
 	public void updateRecipes() {
-		this.availableRecieps.clear();
+		this.availableRecipes.clear();
+		this.currentRecipe = null;
 		if (!this.ingredient.isEmpty() && this.getWorld() != null) {
-			this.availableRecieps = this.getWorld().getRecipeManager().getAllMatches(WackyRecipes.MACHINING, new SimpleInventory(ingredient), this.world);
-			if (this.availableRecieps.size() > 0) {
+			this.availableRecipes = this.getWorld().getRecipeManager().getAllMatches(WackyRecipes.MACHINING, new SimpleInventory(ingredient), this.world);
+			if (this.availableRecipes.size() > 0) {
 				this.recipeIndex = 0;
-				this.currentRecipe = availableRecieps.get(0);
+				this.currentRecipe = availableRecipes.get(0);
 			}
 		}
 	}
 
 	public void cycleRecipe() {
-		if (!this.availableRecieps.isEmpty()) {
-			this.recipeIndex = (this.recipeIndex + 1) % availableRecieps.size(); // loop through all recipes available
-			this.currentRecipe = availableRecieps.get(recipeIndex);
+		if (!this.availableRecipes.isEmpty()) {
+			this.recipeIndex = (this.recipeIndex + 1) % availableRecipes.size(); // loop through all recipes available
+			this.currentRecipe = availableRecipes.get(recipeIndex);
 		}
 	}
 
 	public boolean craft(World world, BlockPos pos) {
 		if (currentRecipe != null && !currentRecipe.isEmpty()) {
 			if (currentRecipe.matches(new SimpleInventory(ingredient), world)) {
-				updateRecipes();
-				dropItem(world, pos, currentRecipe.getOutput());
+				dropItem(world, pos.up(), currentRecipe.getOutput());
 				this.ingredient.decrement(1);
+				updateRecipes();
 				return true;
 			}
 		}
@@ -130,6 +131,8 @@ public class MachiningTableBlockEntity extends BlockEntity implements WrenchBoos
 
 	public void clear() {
 		this.setIngredient(ItemStack.EMPTY);
+		this.updateRecipes();
+		this.markDirty();
 	}
 
 	@Override

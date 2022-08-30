@@ -51,7 +51,7 @@ public class MachiningTableBlock extends BlockWithEntity {
 
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		BlockPos entityPos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos : pos.up();
+		BlockPos entityPos = state.get(HALF) == DoubleBlockHalf.LOWER ? pos : pos.down();
 		BlockEntity blockEntity = world.getBlockEntity(entityPos);
 		if (state.isOf(this) && blockEntity instanceof MachiningTableBlockEntity table) {
 			// if wrench, cycle recipe
@@ -71,12 +71,13 @@ public class MachiningTableBlock extends BlockWithEntity {
 	@Override
 	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
 		if (!state.isOf(newState.getBlock())){
-			if (state.get(HALF) == DoubleBlockHalf.UPPER){
+			if (state.get(HALF) == DoubleBlockHalf.LOWER){
 				BlockEntity blockEntity = world.getBlockEntity(pos);
 				if (state.isOf(this) && blockEntity instanceof MachiningTableBlockEntity table) {
 					table.dropItem(world, pos, table.getIngredient());
 				}
 			}
+			world.markDirty(pos);
 		}
 	}
 
@@ -127,7 +128,7 @@ public class MachiningTableBlock extends BlockWithEntity {
 	}
 
 	@Override
-	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) { //todo fix block entity sticking around??
 		if (!world.isClient && player.isCreative()) {
 			DoubleBlockHalf doubleBlockHalf = state.get(HALF);
 			if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
@@ -164,7 +165,7 @@ public class MachiningTableBlock extends BlockWithEntity {
 	@Nullable
 	@Override
 	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		return state.get(HALF) == DoubleBlockHalf.UPPER ? new MachiningTableBlockEntity(pos, state) : null;
+		return state.get(HALF) == DoubleBlockHalf.LOWER ? new MachiningTableBlockEntity(pos, state) : null;
 	}
 
 	@Override

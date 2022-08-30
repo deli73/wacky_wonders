@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -22,6 +23,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import xyz.sunrose.wacky_wonders.api.WrenchBoostable;
+import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlock;
+import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlockEntity;
+import xyz.sunrose.wacky_wonders.blocks.WackyBlocks;
 import xyz.sunrose.wacky_wonders.mixins.AccessorAbstractFurnaceBlockEntity;
 
 public class WrenchItem extends Item implements Vanishable {
@@ -67,6 +71,15 @@ public class WrenchItem extends Item implements Vanishable {
 		} else if (blockEntity instanceof WrenchBoostable boostable) { //boost any blocks that support the wrench boosting API
 			return boostable.accelerate(TICKS_ADDED) ? ActionResult.SUCCESS : ActionResult.PASS;
 		}
+
+		BlockState state = world.getBlockState(blockPos);
+		if (state.isOf(WackyBlocks.MACHINING_TABLE) && state.get(MachiningTableBlock.HALF) == DoubleBlockHalf.LOWER) {
+			BlockEntity topEntity = world.getBlockEntity(blockPos.up());
+			if (topEntity instanceof MachiningTableBlockEntity table) {
+				table.craft(world, blockPos);
+			}
+		}
+
 		return ActionResult.PASS;
 	}
 
