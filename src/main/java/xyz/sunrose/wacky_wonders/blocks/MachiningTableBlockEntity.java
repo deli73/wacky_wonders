@@ -1,6 +1,8 @@
 package xyz.sunrose.wacky_wonders.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.SimpleInventory;
@@ -22,7 +24,7 @@ import xyz.sunrose.wacky_wonders.recipes.WackyRecipes;
 
 import java.util.List;
 
-public class MachiningTableBlockEntity extends BlockEntity implements WrenchBoostable {
+public class MachiningTableBlockEntity extends BlockEntity {
 	private final String INGREDIENT_KEY = "item";
 
 	private ItemStack ingredient = ItemStack.EMPTY;
@@ -116,6 +118,9 @@ public class MachiningTableBlockEntity extends BlockEntity implements WrenchBoos
 		if(world == null || world.isClient) {return;}
 		PlayerLookup.tracking(this).forEach(player -> player.networkHandler.sendPacket(toUpdatePacket()));
 		super.markDirty();
+		if (!hasWorld()) return;
+		if (world.isClient) return;
+		world.updateListeners(getPos(), Blocks.AIR.getDefaultState(), getCachedState(), Block.NOTIFY_NEIGHBORS | Block.NOTIFY_LISTENERS);
 	}
 
 	// == ETC ==
@@ -133,10 +138,5 @@ public class MachiningTableBlockEntity extends BlockEntity implements WrenchBoos
 		this.setIngredient(ItemStack.EMPTY);
 		this.updateRecipes();
 		this.markDirty();
-	}
-
-	@Override
-	public boolean accelerate(int ticks) {
-		return craft(this.world, this.pos);
 	}
 }

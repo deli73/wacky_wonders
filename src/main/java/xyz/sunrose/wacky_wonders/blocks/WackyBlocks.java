@@ -1,5 +1,7 @@
 package xyz.sunrose.wacky_wonders.blocks;
 
+import com.unascribed.lib39.weld.api.BigBlock;
+import com.unascribed.lib39.weld.api.BigBlockItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
@@ -24,10 +26,10 @@ public class WackyBlocks {
 					.strength(3.5f)
 					.requiresTool()
 					.suffocates(
-							(blockState, blockView, blockPos) -> blockState.get(MachiningTableBlock.HALF) == DoubleBlockHalf.LOWER
+							(blockState, blockView, blockPos) -> blockState.get(MachiningTableBlock.Y) == 0
 					)
 					.solidBlock(
-							(blockState, blockView, blockPos) -> blockState.get(MachiningTableBlock.HALF) == DoubleBlockHalf.LOWER
+							(blockState, blockView, blockPos) -> blockState.get(MachiningTableBlock.Y) == 0
 					)
 					.sounds(BlockSoundGroup.METAL)
 					.allowsSpawning(
@@ -37,7 +39,7 @@ public class WackyBlocks {
 	);
 	public static final Item MACHINING_TABLE_ITEM = Registry.register(
 			Registry.ITEM, MACHINING_TABLE_ID,
-			new BlockItem(MACHINING_TABLE, new QuiltItemSettings()
+			new BigBlockItem((BigBlock) MACHINING_TABLE, new QuiltItemSettings()
 					.group(ItemGroup.DECORATIONS)
 			)
 	);

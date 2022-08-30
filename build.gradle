@@ -41,6 +41,7 @@ dependencies {
 	modApi include("com.unascribed:lib39-ripple:1.1.10") //for custom splash texts
 	modApi include("com.unascribed:lib39-recoil:1.1.10") //for spring boxer usability on armor stands
 	modApi include("com.unascribed:lib39-machination:1.1.10") //for recipes
+	modApi include("com.unascribed:lib39-weld:1.1.10") //for machining table double-block entity
 }
 
 processResources {

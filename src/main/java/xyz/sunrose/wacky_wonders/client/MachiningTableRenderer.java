@@ -1,5 +1,6 @@
 package xyz.sunrose.wacky_wonders.client;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlock;
 import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlockEntity;
 import xyz.sunrose.wacky_wonders.util.RotatableVoxelShape;
 
@@ -28,6 +30,9 @@ public class MachiningTableRenderer<T extends BlockEntity> implements BlockEntit
 	@Override
 	public void render(T entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		MachiningTableBlockEntity table = (MachiningTableBlockEntity) entity;
+		BlockState state = table.getCachedState();
+		if (state.get(MachiningTableBlock.Y) != 0) { //only render from the bottom half;
+		}
 		ItemRenderer renderer = MinecraftClient.getInstance().getItemRenderer();
 		if (table.getWorld() != null) {
 			int lightFront = WorldRenderer.getLightmapCoordinates(table.getWorld(), table.getPos().up());
