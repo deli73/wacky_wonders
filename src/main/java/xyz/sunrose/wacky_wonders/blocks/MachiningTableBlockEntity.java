@@ -12,6 +12,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -19,6 +20,7 @@ import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.qsl.networking.api.PlayerLookup;
 import xyz.sunrose.wacky_wonders.api.WrenchBoostable;
+import xyz.sunrose.wacky_wonders.events.WackySounds;
 import xyz.sunrose.wacky_wonders.recipes.MachiningRecipe;
 import xyz.sunrose.wacky_wonders.recipes.WackyRecipes;
 
@@ -77,6 +79,7 @@ public class MachiningTableBlockEntity extends BlockEntity {
 				dropItem(world, pos.up(), currentRecipe.getOutput());
 				this.ingredient.decrement(1);
 				updateRecipes();
+				world.playSound(null, pos, WackySounds.SOUND_CRAFT, SoundCategory.BLOCKS, 1f, 1f);
 				return true;
 			}
 		}

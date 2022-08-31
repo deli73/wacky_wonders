@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.sunrose.wacky_wonders.blocks.WackyBlocks;
 import xyz.sunrose.wacky_wonders.entities.WackyEntities;
+import xyz.sunrose.wacky_wonders.events.WackySounds;
 import xyz.sunrose.wacky_wonders.items.BoxingGloveItem;
 import xyz.sunrose.wacky_wonders.items.WackyItems;
 import xyz.sunrose.wacky_wonders.items.WrenchItem;
@@ -33,6 +34,7 @@ public class WackyWhimsicalWonders implements ModInitializer {
 		SplashTextRegistry.replace("Absolutely no memes!", "Slightly more memes than advertised!");
 
 		//initialize blocks and items
+		WackySounds.init();
 		WackyBlocks.init();
 		WackyItems.init();
 		WackyEntities.init();

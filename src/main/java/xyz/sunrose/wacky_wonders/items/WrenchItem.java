@@ -26,6 +26,7 @@ import xyz.sunrose.wacky_wonders.api.WrenchBoostable;
 import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlock;
 import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlockEntity;
 import xyz.sunrose.wacky_wonders.blocks.WackyBlocks;
+import xyz.sunrose.wacky_wonders.events.WackySounds;
 import xyz.sunrose.wacky_wonders.mixins.AccessorAbstractFurnaceBlockEntity;
 
 public class WrenchItem extends Item implements Vanishable {
@@ -64,7 +65,9 @@ public class WrenchItem extends Item implements Vanishable {
 				access.setBurnTime(currentBurnTime - diff);
 				access.setCookTime(currentCookTime + diff);
 				furnace.markDirty();
-				world.playSound(playerEntity, blockPos, SoundEvents.BLOCK_SMITHING_TABLE_USE, SoundCategory.PLAYERS, 1f, 1.2f);
+				world.playSound(playerEntity, blockPos, WackySounds.SOUND_BOOST, SoundCategory.BLOCKS,
+						1f, 0.95f + (world.getRandom().nextFloat()*0.2f)
+				);
 				playerEntity.resetLastAttackedTicks();
 				return ActionResult.SUCCESS;
 			}

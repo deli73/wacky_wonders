@@ -124,7 +124,7 @@ public class SpringBoxerItem extends Item implements Vanishable, DirectClickItem
 		return ActionResult.PASS;
 	}
 
-	// == CALLBACK FOR ARMORSTAND OVERRIDE == fixme: use lib39:Recoil to allow for armorstand punching instead?
+	// == CALLBACK FOR ARMORSTAND OVERRIDE ==
 	public static ActionResult onPlayerUse(PlayerEntity player, World world, Hand hand, Entity entity) {
 
 		if(entity instanceof ArmorStandEntity armorStand && !armorStand.hasNoGravity()) {

@@ -1,0 +1,15 @@
+{
+  "wrench.boost": {
+    "sounds": [
+      "wacky_wonders:item/wrench/boost"
+    ],
+    "subtitle": "subtitles.wacky_wonders.wrench.boost"
+  },
+  "machining_table.craft": {
+    "sounds": [
+      "wacky_wonders:block/machining_table/craft1",
+      "wacky_wonders:block/machining_table/craft2"
+    ],
+    "subtitle": "subtitles.wacky_wonders.machining_table.craft"
+  }
+}
