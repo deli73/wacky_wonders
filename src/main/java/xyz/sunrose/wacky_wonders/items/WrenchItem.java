@@ -73,9 +73,8 @@ public class WrenchItem extends Item implements Vanishable {
 		}
 
 		BlockState state = world.getBlockState(blockPos);
-		if (state.isOf(WackyBlocks.MACHINING_TABLE) && state.get(MachiningTableBlock.HALF) == DoubleBlockHalf.LOWER) {
-			BlockEntity topEntity = world.getBlockEntity(blockPos.up());
-			if (topEntity instanceof MachiningTableBlockEntity table) {
+		if (state.isOf(WackyBlocks.MACHINING_TABLE) && state.get(MachiningTableBlock.Y) == 0) {
+			if (blockEntity instanceof MachiningTableBlockEntity table) {
 				table.craft(world, blockPos);
 			}
 		}

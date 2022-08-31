@@ -36,11 +36,12 @@ dependencies {
 	modImplementation libs.quilted.fabric.api
 	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
 
-	modApi include("com.unascribed:lib39-lockpick:1.1.10") //for spring boxer model eventually
-	modApi include("com.unascribed:lib39-dessicant:1.1.10") //for model fixes etc
-	modApi include("com.unascribed:lib39-ripple:1.1.10") //for custom splash texts
-	modApi include("com.unascribed:lib39-recoil:1.1.10") //for spring boxer usability on armor stands
-	modApi include("com.unascribed:lib39-machination:1.1.10") //for recipes
+	modApi include("com.unascribed:lib39-lockpick:1.2.1") //for spring boxer model eventually
+	modApi include("com.unascribed:lib39-dessicant:1.2.1") //for model fixes etc
+	modApi include("com.unascribed:lib39-ripple:1.2.1") //for custom splash texts
+	modApi include("com.unascribed:lib39-recoil:1.2.1") //for spring boxer usability on armor stands
+	modApi include("com.unascribed:lib39-machination:1.2.1") //for recipes
+	modApi include("com.unascribed:lib39-weld:1.2.1") //for machining table double-block entity
 }
 
 processResources {
