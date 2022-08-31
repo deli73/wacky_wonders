@@ -34,6 +34,7 @@ public class MachiningTableBlock extends BigBlock implements BlockEntityProvider
 	private static final RotatableVoxelShape SAW_BOX = new RotatableVoxelShape(1, 0, 6, 3, 3, 14);
 	private static final RotatableVoxelShape ITEM_SPOT_BOX = new RotatableVoxelShape(4, 0, 4, 10, 2, 10);
 
+
 	protected MachiningTableBlock(Settings settings) {
 		super(null, Y, null, settings);
 		this.setDefaultState(
@@ -44,6 +45,7 @@ public class MachiningTableBlock extends BigBlock implements BlockEntityProvider
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (state.isOf(this) && blockEntity instanceof MachiningTableBlockEntity table) {
@@ -62,8 +64,9 @@ public class MachiningTableBlock extends BigBlock implements BlockEntityProvider
 	}
 
 
-	// == IMPORTANT BUT SECONDARY STUFF, MOSTLY BORROWED FROM DOOR CODE ==
+	// == IMPORTANT BUT SECONDARY STUFF ==
 	@Override
+	@SuppressWarnings("deprecation")
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		return state.get(Y) == 0 ? VoxelShapes.fullCube() : VoxelShapes.union(
 				CNC_BOX_1.getShape(state.get(FACING)),
@@ -79,6 +82,7 @@ public class MachiningTableBlock extends BigBlock implements BlockEntityProvider
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
 		return false;
 	}
@@ -91,16 +95,19 @@ public class MachiningTableBlock extends BigBlock implements BlockEntityProvider
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public BlockState rotate(BlockState state, BlockRotation rotation) {
 		return state.with(FACING, rotation.rotate(state.get(FACING)));
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public BlockState mirror(BlockState state, BlockMirror mirror) {
 		return state.rotate(mirror.getRotation(state.get(FACING)));
 	}
