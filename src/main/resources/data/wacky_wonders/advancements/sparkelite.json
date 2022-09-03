@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "wacky_wonders:sparkelite"
+    },
+    "title": "Powdered McGuffin",
+    "description": "Obtain sparkelite.",
+    "frame": "task"
+  },
+  "parent": "wacky_wonders:www_root",
+  "criteria": {
+    "sparkelite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wacky_wonders:sparkelite"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

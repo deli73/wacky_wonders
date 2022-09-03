@@ -71,6 +71,11 @@ public class MachiningTableBlockEntity extends BlockEntity {
 			this.recipeIndex = (this.recipeIndex + 1) % availableRecipes.size(); // loop through all recipes available
 			this.currentRecipe = availableRecipes.get(recipeIndex);
 		}
+		this.markDirty();
+	}
+
+	public int recipeCount() {
+		return availableRecipes.size();
 	}
 
 	public boolean craft(World world, BlockPos pos) {
@@ -80,6 +85,7 @@ public class MachiningTableBlockEntity extends BlockEntity {
 				this.ingredient.decrement(1);
 				updateRecipes();
 				world.playSound(null, pos, WackySounds.SOUND_CRAFT, SoundCategory.BLOCKS, 1f, 1f);
+				this.markDirty();
 				return true;
 			}
 		}

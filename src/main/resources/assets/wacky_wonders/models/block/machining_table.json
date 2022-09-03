@@ -17,7 +17,7 @@
     "down": "wacky_wonders:block/machining_table/bottom",
     "east": "wacky_wonders:block/machining_table/east",
     "north": "wacky_wonders:block/machining_table/north",
-    "particle": "wacky_wonders:block/machining_table/front",
+    "particle": "wacky_wonders:block/machining_table/particles",
     "south": "wacky_wonders:block/machining_table/south",
     "up": "wacky_wonders:block/machining_table/top",
     "west": "wacky_wonders:block/machining_table/west"

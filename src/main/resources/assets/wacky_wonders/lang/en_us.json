@@ -3,5 +3,11 @@
   "item.wacky_wonders.spring_boxer": "Spring-Boxer 3000",
   "item.wacky_wonders.wrench": "Pipe Wrench",
   "item.wacky_wonders.spring": "Spring",
-  "item.wacky_wonders.fruit_bomb": "Fruit Bomb"
+  "item.wacky_wonders.fruit_bomb": "Fruit Bomb",
+  "item.wacky_wonders.smoke_bomb": "Smoke Bomb",
+  "item.wacky_wonders.sparkelite": "Sparkelite",
+  "item.wacky_wonders.sparkelite_bottle": "Sparkling Brew",
+  "block.wacky_wonders.machining_table": "Machining Table",
+  "subtitles.wacky_wonders.wrench.boost": "Wrench boosts",
+  "subtitles.wacky_wonders.machining_table.craft": "Machining Table used"
 }

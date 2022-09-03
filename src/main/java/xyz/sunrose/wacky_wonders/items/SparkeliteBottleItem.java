@@ -14,13 +14,17 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 public class SparkeliteBottleItem extends Item {
 	private static final StatusEffectInstance[] effects = {
-			new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1, false, true, false)
+			new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1, true, true, true),
+			new StatusEffectInstance(StatusEffects.JUMP_BOOST, 500, 1, true, true, true),
+			new StatusEffectInstance(StatusEffects.INVISIBILITY, 200, 0, true, true, true),
+			new StatusEffectInstance(StatusEffects.SLOW_FALLING, 200, 0, true, true, true),
+			new StatusEffectInstance(StatusEffects.GLOWING, 500, 0, true, true, true),
+			new StatusEffectInstance(StatusEffects.SPEED, 500, 1, true, true, true)
 	};
 
 	public SparkeliteBottleItem(Settings settings) {

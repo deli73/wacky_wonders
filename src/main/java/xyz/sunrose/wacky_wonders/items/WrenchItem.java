@@ -2,10 +2,11 @@ package xyz.sunrose.wacky_wonders.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
+import net.minecraft.advancement.Advancement;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -14,14 +15,17 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Vanishable;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
+import xyz.sunrose.wacky_wonders.advancements.WackyCriteria;
 import xyz.sunrose.wacky_wonders.api.WrenchBoostable;
 import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlock;
 import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlockEntity;
@@ -47,13 +51,37 @@ public class WrenchItem extends Item implements Vanishable {
 	}
 
 	public static ActionResult onAttackBlock(PlayerEntity playerEntity, World world, Hand hand, BlockPos blockPos, Direction _direction) {
-		if (hand != Hand.MAIN_HAND || playerEntity.getStackInHand(hand).getItem() != WackyItems.WRENCH || playerEntity.getAttackCooldownProgress(0f) < 1) {
-			// only works if the player has a wrench in their main hand and the attack cooldown is over
+		if (hand != Hand.MAIN_HAND || playerEntity.getStackInHand(hand).getItem() != WackyItems.WRENCH) {
+			// only works if the player has a wrench in their main hand
 			return ActionResult.PASS;
 		}
 
-		// SPEEDUP
+		BlockState state = world.getBlockState(blockPos);
 		BlockEntity blockEntity = world.getBlockEntity(blockPos);
+
+		if (state.isOf(WackyBlocks.MACHINING_TABLE) && playerEntity.getAttackCooldownProgress(0f) > Float.MIN_VALUE) {
+			if (state.get(MachiningTableBlock.Y) == 1){
+				blockPos = blockPos.down();
+				blockEntity = world.getBlockEntity(blockPos);
+			}
+			if (blockEntity instanceof MachiningTableBlockEntity table) {
+				if (table.craft(world, blockPos)){
+					playerEntity.resetLastAttackedTicks();
+					if (playerEntity instanceof ServerPlayerEntity serverPlayer) {
+						WackyCriteria.MACHINING_TABLE.trigger(serverPlayer);
+					}
+				}
+				return ActionResult.SUCCESS;
+			}
+			return ActionResult.FAIL;
+		}
+
+		if (playerEntity.getAttackCooldownProgress(0f) < 1 || playerEntity.isSpectator()) {
+			// aside from activation of machining table, boosting requires cooldown to be over
+			return ActionResult.FAIL;
+		}
+
+		// SPEEDUP
 		if (blockEntity instanceof AbstractFurnaceBlockEntity furnace) { //boost vanilla furnace type blocks
 			AccessorAbstractFurnaceBlockEntity access = (AccessorAbstractFurnaceBlockEntity) furnace;
 			int currentBurnTime = access.getBurnTime();
@@ -73,13 +101,6 @@ public class WrenchItem extends Item implements Vanishable {
 			}
 		} else if (blockEntity instanceof WrenchBoostable boostable) { //boost any blocks that support the wrench boosting API
 			return boostable.accelerate(TICKS_ADDED) ? ActionResult.SUCCESS : ActionResult.PASS;
-		}
-
-		BlockState state = world.getBlockState(blockPos);
-		if (state.isOf(WackyBlocks.MACHINING_TABLE) && state.get(MachiningTableBlock.Y) == 0) {
-			if (blockEntity instanceof MachiningTableBlockEntity table) {
-				table.craft(world, blockPos);
-			}
 		}
 
 		return ActionResult.PASS;

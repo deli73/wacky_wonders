@@ -82,6 +82,13 @@ public class WackyItems {
 			)
 	);
 
+	public static final Item COPPER_WIRE = Registry.register(
+			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "copper_wire"),
+			new Item(new QuiltItemSettings()
+					.group(ItemGroup.MATERIALS)
+			)
+	);
+
 
 	public static void init() {
 		// == ITEM BEHAVIORS ==

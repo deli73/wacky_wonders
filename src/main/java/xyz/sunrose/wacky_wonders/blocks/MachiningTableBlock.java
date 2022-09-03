@@ -22,6 +22,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import xyz.sunrose.wacky_wonders.items.WackyItems;
 import xyz.sunrose.wacky_wonders.util.RotatableVoxelShape;
 
 public class MachiningTableBlock extends BigBlock implements BlockEntityProvider{
@@ -47,22 +48,41 @@ public class MachiningTableBlock extends BigBlock implements BlockEntityProvider
 	@Override
 	@SuppressWarnings("deprecation")
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (state.get(Y) == 1) {pos = pos.down();}
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (state.isOf(this) && blockEntity instanceof MachiningTableBlockEntity table) {
-			// if wrench, cycle recipe
-			table.cycleRecipe();
-
-			// otherwise swap items
-			ItemStack currentItem = table.getIngredient().copy();
-			ItemStack playerHolding = player.getStackInHand(hand).copy();
-			if (currentItem.isEmpty() && playerHolding.isEmpty()) return ActionResult.PASS; //don't swing arm if there's nothing to swap
-			table.setIngredient(playerHolding);
-			player.setStackInHand(hand, currentItem);
-			return ActionResult.SUCCESS;
+		if (hand == Hand.MAIN_HAND && state.isOf(this) && blockEntity instanceof MachiningTableBlockEntity table) {
+			if (player.getStackInHand(hand).getItem() == WackyItems.WRENCH) {
+				// if wrench, cycle recipe
+				if (table.recipeCount() > 1) {
+					table.cycleRecipe();
+					return ActionResult.SUCCESS;
+				}
+				return ActionResult.FAIL;
+			} else {
+				// otherwise swap items
+				ItemStack currentItem = table.getIngredient().copy();
+				ItemStack playerHolding = player.getStackInHand(hand).copy();
+				if (currentItem.isEmpty() && playerHolding.isEmpty())
+					return ActionResult.PASS; //don't swing arm if there's nothing to swap
+				table.setIngredient(playerHolding);
+				player.setStackInHand(hand, currentItem);
+				return ActionResult.SUCCESS;
+			}
 		}
 		return ActionResult.PASS;
 	}
 
+	@Override
+	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+		if (state.get(Y) == 0) {
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (blockEntity instanceof MachiningTableBlockEntity table) {
+				table.dropItem(world, pos, table.getIngredient());
+				table.clear();
+			}
+		}
+		super.onBreak(world, pos, state, player);
+	}
 
 	// == IMPORTANT BUT SECONDARY STUFF ==
 	@Override
@@ -91,7 +111,7 @@ public class MachiningTableBlock extends BigBlock implements BlockEntityProvider
 	@Nullable
 	@Override
 	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		return new MachiningTableBlockEntity(pos, state);
+		return state.get(Y) == 0 ? new MachiningTableBlockEntity(pos, state) : null;
 	}
 
 	@Override

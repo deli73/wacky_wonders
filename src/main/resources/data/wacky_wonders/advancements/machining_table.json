@@ -1,0 +1,16 @@
+{
+  "parent": "wacky_wonders:www_root",
+  "display": {
+    "icon": {
+      "item": "wacky_wonders:spring"
+    },
+    "title": "???",
+    "description": "Hit a machining table with a wrench to activate it.",
+    "frame": "task"
+  },
+  "criteria": {
+    "machining_table": {
+      "trigger": "wacky_wonders:machining_table"
+    }
+  }
+}

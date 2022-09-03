@@ -8,6 +8,7 @@ import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import xyz.sunrose.wacky_wonders.advancements.WackyCriteria;
 import xyz.sunrose.wacky_wonders.blocks.WackyBlocks;
 import xyz.sunrose.wacky_wonders.entities.WackyEntities;
 import xyz.sunrose.wacky_wonders.events.WackySounds;
@@ -39,6 +40,7 @@ public class WackyWhimsicalWonders implements ModInitializer {
 		WackyItems.init();
 		WackyEntities.init();
 		WackyRecipes.init();
+		WackyCriteria.init();
 
 		// register Events
 		AttackEntityCallback.EVENT.register(BoxingGloveItem::onPlayerAttack);
