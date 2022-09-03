@@ -17,80 +17,97 @@ import xyz.sunrose.wacky_wonders.entities.FruitBombEntity;
 import xyz.sunrose.wacky_wonders.entities.SmokeBombEntity;
 
 public class WItems {
+	// materials
+	public static final Item SPARKELITE = Registry.register(
+			Registry.ITEM,  WWW.id("sparkelite"),
+			new Item(new QuiltItemSettings()
+					.group(WItemGroups.MATERIALS)
+			)
+	);
+	// components
 	public static final Item SPRING = Registry.register(
 			Registry.ITEM, WWW.id("spring"),
 			new Item(new QuiltItemSettings()
-					.group(ItemGroup.MATERIALS)
+					.group(WItemGroups.MATERIALS)
+			)
+	);
+	public static final Item SCREW = Registry.register(
+			Registry.ITEM, WWW.id("screw"),
+			new Item(new QuiltItemSettings()
+					.group(WItemGroups.MATERIALS)
+			)
+	);
+	public static final Item COPPER_WIRE = Registry.register(
+			Registry.ITEM,  WWW.id("copper_wire"),
+			new Item(new QuiltItemSettings()
+					.group(WItemGroups.MATERIALS)
+			)
+	);
+
+	//tools
+	public static final Item WRENCH = Registry.register(
+			Registry.ITEM,  WWW.id("wrench"),
+			new WrenchItem(new QuiltItemSettings()
+					.group(WItemGroups.GADGETS)
+					.maxDamage(ToolMaterials.IRON.getDurability())
+			)
+	);
+
+	public static final Item MALLET = Registry.register(
+			Registry.ITEM, WWW.id("mallet"),
+			new MalletItem(new QuiltItemSettings()
+					.group(WItemGroups.GADGETS)
+					.maxDamage(512)
 			)
 	);
 
 	public static final Item BOXING_GLOVE = Registry.register(
 			Registry.ITEM,  WWW.id("boxing_glove"),
 			new BoxingGloveItem(new QuiltItemSettings()
-					.group(ItemGroup.COMBAT)
+					.group(WItemGroups.GADGETS)
 					.maxCount(1)
 			)
 	);
-
+	//fun gadgets
 	public static final Identifier SPRING_BOXER_ID =  WWW.id("spring_boxer");
 	public static final Item SPRING_BOXER = Registry.register(
 			Registry.ITEM, SPRING_BOXER_ID,
 			new SpringBoxerItem(new QuiltItemSettings()
-					.group(ItemGroup.COMBAT)
+					.group(WItemGroups.GADGETS)
 					.maxDamage(200)
 					.rarity(Rarity.UNCOMMON)
-			)
-	);
-
-	public static final Item WRENCH = Registry.register(
-			Registry.ITEM,  WWW.id("wrench"),
-			new WrenchItem(new QuiltItemSettings()
-					.group(ItemGroup.TOOLS)
-					.maxDamage(ToolMaterials.IRON.getDurability())
-			)
-	);
-
-	public static final Item FRUIT_BOMB = Registry.register(
-			Registry.ITEM,  WWW.id("fruit_bomb"),
-			new FruitBombItem(new QuiltItemSettings()
-					.group(ItemGroup.COMBAT)
-					.maxCount(16)
 			)
 	);
 
 	public static final Item SMOKE_BOMB = Registry.register(
 			Registry.ITEM,  WWW.id("smoke_bomb"),
 			new SmokeBombItem(new QuiltItemSettings()
-					.group(ItemGroup.COMBAT)
+					.group(WItemGroups.GADGETS)
+					.maxCount(16)
+			)
+	);
+	public static final Item FRUIT_BOMB = Registry.register(
+			Registry.ITEM,  WWW.id("fruit_bomb"),
+			new FruitBombItem(new QuiltItemSettings()
+					.group(WItemGroups.GADGETS)
 					.maxCount(16)
 			)
 	);
 
-	public static final Item SPARKELITE = Registry.register(
-			Registry.ITEM,  WWW.id("sparkelite"),
-			new Item(new QuiltItemSettings()
-					.group(ItemGroup.MATERIALS)
-			)
-	);
-
+	// ???
 	public static final Item SPARKELITE_BOTTLE = Registry.register(
 			Registry.ITEM,  WWW.id("sparkelite_bottle"),
 			new SparkeliteBottleItem(new QuiltItemSettings()
-					.group(ItemGroup.BREWING)
+					.group(WItemGroups.ODDITIES)
 					.maxCount(4)
 					.recipeRemainder(Items.GLASS_BOTTLE)
 			)
 	);
 
-	public static final Item COPPER_WIRE = Registry.register(
-			Registry.ITEM,  WWW.id("copper_wire"),
-			new Item(new QuiltItemSettings()
-					.group(ItemGroup.MATERIALS)
-			)
-	);
-
 
 	public static void init() {
+		WItemGroups.init();
+
 		// == ITEM BEHAVIORS ==
 		DispenserBlock.registerBehavior(SMOKE_BOMB, new ProjectileDispenserBehavior() {
 			@Override

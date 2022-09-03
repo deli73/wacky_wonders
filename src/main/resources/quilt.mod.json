@@ -20,8 +20,8 @@
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "xyz.sunrose.wacky_wonders.WackyWhimsicalWonders",
-			"client_init": "xyz.sunrose.wacky_wonders.client.WackyWhimsicalWondersClient"
+			"init": "xyz.sunrose.wacky_wonders.WWW",
+			"client_init": "xyz.sunrose.wacky_wonders.client.WWWClient"
 		},
 		"depends": [
 			{
@@ -35,6 +35,10 @@
 			{
 				"id": "minecraft",
 				"versions": ">=1.19.2"
+			},
+			{
+				"id": "pehkui",
+				"versions": ">=3.4.2"
 			}
 		]
 	},

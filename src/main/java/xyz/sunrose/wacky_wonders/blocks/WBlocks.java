@@ -14,6 +14,7 @@ import org.quiltmc.qsl.block.entity.api.QuiltBlockEntityTypeBuilder;
 import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 import xyz.sunrose.wacky_wonders.WWW;
+import xyz.sunrose.wacky_wonders.items.WItemGroups;
 
 public class WBlocks {
 	public static final Identifier MACHINING_TABLE_ID =  WWW.id("machining_table");
@@ -37,7 +38,7 @@ public class WBlocks {
 	public static final Item MACHINING_TABLE_ITEM = Registry.register(
 			Registry.ITEM, MACHINING_TABLE_ID,
 			new BigBlockItem((BigBlock) MACHINING_TABLE, new QuiltItemSettings()
-					.group(ItemGroup.DECORATIONS)
+					.group(WItemGroups.BLOCKS)
 			)
 	);
 	public static final BlockEntityType<MachiningTableBlockEntity> MACHINING_TABLE_ENTITY_TYPE = Registry.register(

@@ -47,10 +47,11 @@ public class WrenchItem extends Item implements Vanishable {
 	}
 
 	public static ActionResult onAttackBlock(PlayerEntity playerEntity, World world, Hand hand, BlockPos blockPos, Direction _direction) {
-		if (hand != Hand.MAIN_HAND || playerEntity.getStackInHand(hand).getItem() != WItems.WRENCH) {
+		if (hand != Hand.MAIN_HAND || playerEntity.getStackInHand(hand).getItem() != WItems.WRENCH || playerEntity.isSpectator()) {
 			// only works if the player has a wrench in their main hand
 			return ActionResult.PASS;
 		}
+		if (world.isClient) {return ActionResult.SUCCESS;}
 
 		BlockState state = world.getBlockState(blockPos);
 		BlockEntity blockEntity = world.getBlockEntity(blockPos);

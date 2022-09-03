@@ -11,5 +11,11 @@
       "wacky_wonders:block/machining_table/craft2"
     ],
     "subtitle": "subtitles.wacky_wonders.machining_table.craft"
+  },
+  "mallet.bonk": {
+    "sounds": [
+      "wacky_wonders:item/mallet/bonk"
+    ],
+    "subtitle": "subtitles.wacky_wonders.mallet.bonk"
   }
 }

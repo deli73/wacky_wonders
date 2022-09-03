@@ -19,6 +19,9 @@ repositories {
 			includeGroup 'com.unascribed'
 		}
 	}
+	maven {
+		url = "https://jitpack.io"
+	}
 }
 
 // All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
@@ -43,6 +46,10 @@ dependencies {
 	modApi include("com.unascribed:lib39-machination:1.2.1") //for recipes
 	modApi include("com.unascribed:lib39-weld:1.2.1") //for machining table double-block entity
 	modApi include("com.unascribed:lib39-fractal:1.2.1") //for item groups
+
+	modApi ("com.github.Virtuoel:Pehkui:3.4.2", {
+		exclude group: "net.fabricmc.fabric-api"
+	})
 }
 
 processResources {

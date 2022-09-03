@@ -18,5 +18,11 @@ public class WSounds {
 			new SoundEvent(SOUND_CRAFT_ID)
 	);
 
+	private static final Identifier SOUND_BONK_ID = WWW.id("mallet.bonk");
+	public static final SoundEvent SOUND_BONK = Registry.register(
+			Registry.SOUND_EVENT, SOUND_BONK_ID,
+			new SoundEvent(SOUND_BONK_ID)
+	);
+
 	public static void init() {}
 }

@@ -25,7 +25,7 @@ import xyz.sunrose.wacky_wonders.recipes.WRecipes;
 
 import java.util.List;
 
-public class MachiningTableBlockEntity extends BlockEntity {
+public class MachiningTableBlockEntity extends BlockEntity { //fixme: this just doesn't work rn and i don't know why
 	private final String INGREDIENT_KEY = "item";
 
 	private ItemStack ingredient = ItemStack.EMPTY;

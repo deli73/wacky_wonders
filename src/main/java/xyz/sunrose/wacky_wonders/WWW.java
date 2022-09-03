@@ -14,6 +14,7 @@ import xyz.sunrose.wacky_wonders.blocks.WBlocks;
 import xyz.sunrose.wacky_wonders.entities.WEntities;
 import xyz.sunrose.wacky_wonders.events.WSounds;
 import xyz.sunrose.wacky_wonders.items.BoxingGloveItem;
+import xyz.sunrose.wacky_wonders.items.MalletItem;
 import xyz.sunrose.wacky_wonders.items.WItems;
 import xyz.sunrose.wacky_wonders.items.WrenchItem;
 import xyz.sunrose.wacky_wonders.recipes.WRecipes;
@@ -30,6 +31,7 @@ public class WWW implements ModInitializer {
 		SplashTextRegistry.registerStatic(
 				"Cartoon logic!", "Spring-loaded!", "Yeetable!", "Stimmy!", "Hackable!", "Wacky!", "Whimsical!",
 				"Lathes are dangerous!", "First-order retrievabiity!", "Myth BUSTED", "Engineering!",
+				"Drone racing!", "Nope!", "The Flattening!",
 				"Also try Raft!", "Also try Marble It Up!", "Also try Hyperbolica!", "Also try Garry's Mod!"
 		);
 		SplashTextRegistry.replace("Conventional!", "Unconventional!");
@@ -45,6 +47,7 @@ public class WWW implements ModInitializer {
 
 		// register Events
 		AttackEntityCallback.EVENT.register(BoxingGloveItem::onPlayerAttack);
+		AttackEntityCallback.EVENT.register(MalletItem::onPlayerAttack);
 		AttackBlockCallback.EVENT.register(WrenchItem::onAttackBlock);
 	}
 
