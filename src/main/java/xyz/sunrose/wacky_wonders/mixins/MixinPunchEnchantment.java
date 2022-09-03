@@ -6,7 +6,7 @@ import net.minecraft.enchantment.PunchEnchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import xyz.sunrose.wacky_wonders.items.WackyItems;
+import xyz.sunrose.wacky_wonders.items.WItems;
 
 @Mixin(PunchEnchantment.class)
 public class MixinPunchEnchantment extends Enchantment {
@@ -15,6 +15,6 @@ public class MixinPunchEnchantment extends Enchantment {
 	}
 
 	public boolean isAcceptableItem(ItemStack stack) {
-		return this.type.isAcceptableItem(stack.getItem()) || stack.getItem() == WackyItems.SPRING_BOXER;
+		return this.type.isAcceptableItem(stack.getItem()) || stack.getItem() == WItems.SPRING_BOXER;
 	}
 }

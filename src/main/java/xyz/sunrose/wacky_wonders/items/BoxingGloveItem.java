@@ -78,7 +78,7 @@ public class BoxingGloveItem extends Item implements Vanishable {
 		}
 
 		// apply knockback if applicable
-		if(player.getStackInHand(hand).getItem() == WackyItems.BOXING_GLOVE && entity instanceof LivingEntity target){
+		if(player.getStackInHand(hand).getItem() == WItems.BOXING_GLOVE && entity instanceof LivingEntity target){
 			TargetUtils.knockback(player, target, 1);
 			world.playSound(
 					null, player.getX(), player.getY(), player.getZ(),

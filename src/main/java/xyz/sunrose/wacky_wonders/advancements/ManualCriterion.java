@@ -7,13 +7,13 @@ import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
+import xyz.sunrose.wacky_wonders.WWW;
 
 public class ManualCriterion extends AbstractCriterion<ManualCriterion.Conditions> {
 	private final Identifier id;
 
 	public ManualCriterion(String id) {
-		this.id = new Identifier(WackyWhimsicalWonders.MODID, id);
+		this.id = WWW.id(id);
 	}
 
 	@Override

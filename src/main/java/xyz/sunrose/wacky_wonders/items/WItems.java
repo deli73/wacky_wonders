@@ -12,27 +12,27 @@ import net.minecraft.util.math.Position;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
-import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
+import xyz.sunrose.wacky_wonders.WWW;
 import xyz.sunrose.wacky_wonders.entities.FruitBombEntity;
 import xyz.sunrose.wacky_wonders.entities.SmokeBombEntity;
 
-public class WackyItems {
+public class WItems {
 	public static final Item SPRING = Registry.register(
-			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "spring"),
+			Registry.ITEM, WWW.id("spring"),
 			new Item(new QuiltItemSettings()
 					.group(ItemGroup.MATERIALS)
 			)
 	);
 
 	public static final Item BOXING_GLOVE = Registry.register(
-			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "boxing_glove"),
+			Registry.ITEM,  WWW.id("boxing_glove"),
 			new BoxingGloveItem(new QuiltItemSettings()
 					.group(ItemGroup.COMBAT)
 					.maxCount(1)
 			)
 	);
 
-	public static final Identifier SPRING_BOXER_ID = new Identifier(WackyWhimsicalWonders.MODID, "spring_boxer");
+	public static final Identifier SPRING_BOXER_ID =  WWW.id("spring_boxer");
 	public static final Item SPRING_BOXER = Registry.register(
 			Registry.ITEM, SPRING_BOXER_ID,
 			new SpringBoxerItem(new QuiltItemSettings()
@@ -43,7 +43,7 @@ public class WackyItems {
 	);
 
 	public static final Item WRENCH = Registry.register(
-			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "wrench"),
+			Registry.ITEM,  WWW.id("wrench"),
 			new WrenchItem(new QuiltItemSettings()
 					.group(ItemGroup.TOOLS)
 					.maxDamage(ToolMaterials.IRON.getDurability())
@@ -51,7 +51,7 @@ public class WackyItems {
 	);
 
 	public static final Item FRUIT_BOMB = Registry.register(
-			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "fruit_bomb"),
+			Registry.ITEM,  WWW.id("fruit_bomb"),
 			new FruitBombItem(new QuiltItemSettings()
 					.group(ItemGroup.COMBAT)
 					.maxCount(16)
@@ -59,7 +59,7 @@ public class WackyItems {
 	);
 
 	public static final Item SMOKE_BOMB = Registry.register(
-			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "smoke_bomb"),
+			Registry.ITEM,  WWW.id("smoke_bomb"),
 			new SmokeBombItem(new QuiltItemSettings()
 					.group(ItemGroup.COMBAT)
 					.maxCount(16)
@@ -67,14 +67,14 @@ public class WackyItems {
 	);
 
 	public static final Item SPARKELITE = Registry.register(
-			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "sparkelite"),
+			Registry.ITEM,  WWW.id("sparkelite"),
 			new Item(new QuiltItemSettings()
 					.group(ItemGroup.MATERIALS)
 			)
 	);
 
 	public static final Item SPARKELITE_BOTTLE = Registry.register(
-			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "sparkelite_bottle"),
+			Registry.ITEM,  WWW.id("sparkelite_bottle"),
 			new SparkeliteBottleItem(new QuiltItemSettings()
 					.group(ItemGroup.BREWING)
 					.maxCount(4)
@@ -83,7 +83,7 @@ public class WackyItems {
 	);
 
 	public static final Item COPPER_WIRE = Registry.register(
-			Registry.ITEM, new Identifier(WackyWhimsicalWonders.MODID, "copper_wire"),
+			Registry.ITEM,  WWW.id("copper_wire"),
 			new Item(new QuiltItemSettings()
 					.group(ItemGroup.MATERIALS)
 			)

@@ -2,8 +2,6 @@ package xyz.sunrose.wacky_wonders.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.minecraft.advancement.Advancement;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -19,18 +17,16 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
-import xyz.sunrose.wacky_wonders.advancements.WackyCriteria;
+import xyz.sunrose.wacky_wonders.advancements.WCriteria;
 import xyz.sunrose.wacky_wonders.api.WrenchBoostable;
 import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlock;
 import xyz.sunrose.wacky_wonders.blocks.MachiningTableBlockEntity;
-import xyz.sunrose.wacky_wonders.blocks.WackyBlocks;
-import xyz.sunrose.wacky_wonders.events.WackySounds;
+import xyz.sunrose.wacky_wonders.blocks.WBlocks;
+import xyz.sunrose.wacky_wonders.events.WSounds;
 import xyz.sunrose.wacky_wonders.mixins.AccessorAbstractFurnaceBlockEntity;
 
 public class WrenchItem extends Item implements Vanishable {
@@ -51,7 +47,7 @@ public class WrenchItem extends Item implements Vanishable {
 	}
 
 	public static ActionResult onAttackBlock(PlayerEntity playerEntity, World world, Hand hand, BlockPos blockPos, Direction _direction) {
-		if (hand != Hand.MAIN_HAND || playerEntity.getStackInHand(hand).getItem() != WackyItems.WRENCH) {
+		if (hand != Hand.MAIN_HAND || playerEntity.getStackInHand(hand).getItem() != WItems.WRENCH) {
 			// only works if the player has a wrench in their main hand
 			return ActionResult.PASS;
 		}
@@ -59,7 +55,7 @@ public class WrenchItem extends Item implements Vanishable {
 		BlockState state = world.getBlockState(blockPos);
 		BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
-		if (state.isOf(WackyBlocks.MACHINING_TABLE) && playerEntity.getAttackCooldownProgress(0f) > Float.MIN_VALUE) {
+		if (state.isOf(WBlocks.MACHINING_TABLE) && playerEntity.getAttackCooldownProgress(0f) > Float.MIN_VALUE) {
 			if (state.get(MachiningTableBlock.Y) == 1){
 				blockPos = blockPos.down();
 				blockEntity = world.getBlockEntity(blockPos);
@@ -68,7 +64,7 @@ public class WrenchItem extends Item implements Vanishable {
 				if (table.craft(world, blockPos)){
 					playerEntity.resetLastAttackedTicks();
 					if (playerEntity instanceof ServerPlayerEntity serverPlayer) {
-						WackyCriteria.MACHINING_TABLE.trigger(serverPlayer);
+						WCriteria.MACHINING_TABLE.trigger(serverPlayer);
 					}
 				}
 				return ActionResult.SUCCESS;
@@ -93,7 +89,7 @@ public class WrenchItem extends Item implements Vanishable {
 				access.setBurnTime(currentBurnTime - diff);
 				access.setCookTime(currentCookTime + diff);
 				furnace.markDirty();
-				world.playSound(playerEntity, blockPos, WackySounds.SOUND_BOOST, SoundCategory.BLOCKS,
+				world.playSound(playerEntity, blockPos, WSounds.SOUND_BOOST, SoundCategory.BLOCKS,
 						1f, 0.95f + (world.getRandom().nextFloat()*0.2f)
 				);
 				playerEntity.resetLastAttackedTicks();

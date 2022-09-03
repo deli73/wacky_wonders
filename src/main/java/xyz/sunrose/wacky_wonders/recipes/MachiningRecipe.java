@@ -24,7 +24,7 @@ public class MachiningRecipe implements Recipe<Inventory> {
 
 	@Override
 	public RecipeType<?> getType() {
-		return WackyRecipes.MACHINING;
+		return WRecipes.MACHINING;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class MachiningRecipe implements Recipe<Inventory> {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return WackyRecipes.MACHINING_SERIALIZER;
+		return WRecipes.MACHINING_SERIALIZER;
 	}
 
 	public static class Serializer implements RecipeSerializer<MachiningRecipe> {

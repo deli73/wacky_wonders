@@ -22,7 +22,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import xyz.sunrose.wacky_wonders.items.WackyItems;
+import xyz.sunrose.wacky_wonders.items.WItems;
 import xyz.sunrose.wacky_wonders.util.RotatableVoxelShape;
 
 public class MachiningTableBlock extends BigBlock implements BlockEntityProvider{
@@ -51,7 +51,7 @@ public class MachiningTableBlock extends BigBlock implements BlockEntityProvider
 		if (state.get(Y) == 1) {pos = pos.down();}
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (hand == Hand.MAIN_HAND && state.isOf(this) && blockEntity instanceof MachiningTableBlockEntity table) {
-			if (player.getStackInHand(hand).getItem() == WackyItems.WRENCH) {
+			if (player.getStackInHand(hand).getItem() == WItems.WRENCH) {
 				// if wrench, cycle recipe
 				if (table.recipeCount() > 1) {
 					table.cycleRecipe();

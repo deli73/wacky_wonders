@@ -19,10 +19,9 @@ import net.minecraft.world.World;
 import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.Nullable;
 import org.quiltmc.qsl.networking.api.PlayerLookup;
-import xyz.sunrose.wacky_wonders.api.WrenchBoostable;
-import xyz.sunrose.wacky_wonders.events.WackySounds;
+import xyz.sunrose.wacky_wonders.events.WSounds;
 import xyz.sunrose.wacky_wonders.recipes.MachiningRecipe;
-import xyz.sunrose.wacky_wonders.recipes.WackyRecipes;
+import xyz.sunrose.wacky_wonders.recipes.WRecipes;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class MachiningTableBlockEntity extends BlockEntity {
 	public Direction facing;
 
 	public MachiningTableBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(WackyBlocks.MACHINING_TABLE_ENTITY_TYPE, blockPos, blockState);
+		super(WBlocks.MACHINING_TABLE_ENTITY_TYPE, blockPos, blockState);
 		facing = blockState.get(MachiningTableBlock.FACING);
 	}
 
@@ -58,7 +57,7 @@ public class MachiningTableBlockEntity extends BlockEntity {
 		this.availableRecipes.clear();
 		this.currentRecipe = null;
 		if (!this.ingredient.isEmpty() && this.getWorld() != null) {
-			this.availableRecipes = this.getWorld().getRecipeManager().getAllMatches(WackyRecipes.MACHINING, new SimpleInventory(ingredient), this.world);
+			this.availableRecipes = this.getWorld().getRecipeManager().getAllMatches(WRecipes.MACHINING, new SimpleInventory(ingredient), this.world);
 			if (this.availableRecipes.size() > 0) {
 				this.recipeIndex = 0;
 				this.currentRecipe = availableRecipes.get(0);
@@ -84,7 +83,7 @@ public class MachiningTableBlockEntity extends BlockEntity {
 				dropItem(world, pos.up(), currentRecipe.getOutput());
 				this.ingredient.decrement(1);
 				updateRecipes();
-				world.playSound(null, pos, WackySounds.SOUND_CRAFT, SoundCategory.BLOCKS, 1f, 1f);
+				world.playSound(null, pos, WSounds.SOUND_CRAFT, SoundCategory.BLOCKS, 1f, 1f);
 				this.markDirty();
 				return true;
 			}

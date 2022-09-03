@@ -18,7 +18,7 @@ import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import xyz.sunrose.wacky_wonders.util.RandomHelper;
-import xyz.sunrose.wacky_wonders.items.WackyItems;
+import xyz.sunrose.wacky_wonders.items.WItems;
 
 import java.util.List;
 
@@ -36,15 +36,15 @@ public class SmokeBombEntity extends ThrownItemEntity {
 	}
 
 	public SmokeBombEntity(World world, LivingEntity livingEntity) {
-		super(WackyEntities.SMOKE_BOMB_ENTITY_TYPE, livingEntity, world);
+		super(WEntities.SMOKE_BOMB_ENTITY_TYPE, livingEntity, world);
 	}
 
 	public SmokeBombEntity(World world, double x, double y, double z) {
-		super(WackyEntities.SMOKE_BOMB_ENTITY_TYPE, x, y, z, world);
+		super(WEntities.SMOKE_BOMB_ENTITY_TYPE, x, y, z, world);
 	}
 
 	@Override
-	protected Item getDefaultItem() {return WackyItems.SMOKE_BOMB;}
+	protected Item getDefaultItem() {return WItems.SMOKE_BOMB;}
 
 	@Override
 	protected void onCollision(HitResult hitResult) {

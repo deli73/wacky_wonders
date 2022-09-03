@@ -129,7 +129,7 @@ public class SpringBoxerItem extends Item implements Vanishable, DirectClickItem
 
 		if(entity instanceof ArmorStandEntity armorStand && !armorStand.hasNoGravity()) {
 			ItemStack stack = player.getStackInHand(hand);
-			if (stack.getItem() == WackyItems.SPRING_BOXER) {
+			if (stack.getItem() == WItems.SPRING_BOXER) {
 				if (player.isSpectator()) {return ActionResult.PASS;}
 				if(isCharged(stack) && fire(world, player, hand, stack)){
 					setCharged(stack, false);

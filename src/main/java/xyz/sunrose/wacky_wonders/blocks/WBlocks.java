@@ -3,11 +3,8 @@ package xyz.sunrose.wacky_wonders.blocks;
 import com.unascribed.lib39.weld.api.BigBlock;
 import com.unascribed.lib39.weld.api.BigBlockItem;
 import net.minecraft.block.Block;
-import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
@@ -16,10 +13,10 @@ import net.minecraft.util.registry.Registry;
 import org.quiltmc.qsl.block.entity.api.QuiltBlockEntityTypeBuilder;
 import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
-import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
+import xyz.sunrose.wacky_wonders.WWW;
 
-public class WackyBlocks {
-	public static final Identifier MACHINING_TABLE_ID = new Identifier(WackyWhimsicalWonders.MODID, "machining_table");
+public class WBlocks {
+	public static final Identifier MACHINING_TABLE_ID =  WWW.id("machining_table");
 	public static final Block MACHINING_TABLE = Registry.register(
 			Registry.BLOCK, MACHINING_TABLE_ID,
 			new MachiningTableBlock(QuiltBlockSettings.of(Material.METAL)

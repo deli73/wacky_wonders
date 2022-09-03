@@ -1,18 +1,16 @@
 package xyz.sunrose.wacky_wonders.util;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
-import xyz.sunrose.wacky_wonders.WackyWhimsicalWonders;
+import xyz.sunrose.wacky_wonders.WWW;
 
 import java.util.function.Predicate;
 
@@ -30,7 +28,7 @@ public class TargetUtils {
 		EntityHitResult hit = ProjectileUtil.raycast(from, eyePos, rotatedEyePos, box, predicate, distSquared);
 		if (hit == null){return null;}
 
-		WackyWhimsicalWonders.LOGGER.info("TEST");
+		WWW.LOGGER.info("TEST");
 		return eyePos.squaredDistanceTo(hit.getPos()) > distSquared ? null : hit.getEntity();
 	}
 
