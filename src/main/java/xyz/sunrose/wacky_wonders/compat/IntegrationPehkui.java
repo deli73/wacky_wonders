@@ -13,9 +13,6 @@ import xyz.sunrose.wacky_wonders.WWW;
 public class IntegrationPehkui {
 	private static final int UNSQUISH_TIME = 40;
 	private static final float SQUISH_FACTOR = 0.5f;
-	/*private static final Float2FloatFunction SQUISH_EASE_BEZIER = ScaleRegistries.register(ScaleRegistries.SCALE_EASINGS, WWW.id("snap_bezier"),
-			CubicBezier.cubic_bezier(1,-0.19,.68,1.41)
-	);*/
 	private static final Float2FloatFunction SQUISH_EASE_ELASTIC = ScaleRegistries.register(ScaleRegistries.SCALE_EASINGS, WWW.id("snap_elastic"),
 			x -> {
 				if (x < 0.5F)

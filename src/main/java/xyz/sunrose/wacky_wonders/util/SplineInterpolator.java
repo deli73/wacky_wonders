@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SplineInterpolator {
 
-	private final double points[];
+	private final double[] points;
 	private final List<PointUnit> normalisedCurve;
 
 	public SplineInterpolator(double x1, double y1, double x2, double y2) {
@@ -73,8 +73,7 @@ public class SplineInterpolator {
 		final double b1 = 3 * t * invT * invT;
 		final double b2 = 3 * t * t * invT;
 		final double b3 = t * t * t;
-		final Point2D xy = new Point2D.Double((b1 * points[0]) + (b2 * points[2]) + b3, (b1 * points[1]) + (b2 * points[3]) + b3);
-		return xy;
+		return new Point2D.Double((b1 * points[0]) + (b2 * points[2]) + b3, (b1 * points[1]) + (b2 * points[3]) + b3);
 	}
 
 	protected double getY(double t) {
@@ -85,15 +84,7 @@ public class SplineInterpolator {
 		return (b1 * points[2]) + (b2 * points[3]) + b3;
 	}
 
-	public class PointUnit {
-
-		private final double distance;
-		private final double point;
-
-		public PointUnit(double distance, double point) {
-			this.distance = distance;
-			this.point = point;
-		}
+	public record PointUnit(double distance, double point) {
 
 		public double getDistance() {
 			return distance;
