@@ -1,0 +1,10 @@
+{
+  "type": "wacky_wonders:electrifying",
+  "ingredient": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "result": {
+    "item": "wacky_wonders:sparkelite",
+    "count": 1
+  }
+}

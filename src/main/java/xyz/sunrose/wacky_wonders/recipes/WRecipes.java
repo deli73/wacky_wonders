@@ -10,8 +10,15 @@ public class WRecipes {
 	public static final RecipeType<MachiningRecipe> MACHINING = RecipeType.register(WWW.MODID + "machining");
 	public static final RecipeSerializer<MachiningRecipe> MACHINING_SERIALIZER = Registry.register(
 			Registry.RECIPE_SERIALIZER,
-			new Identifier(WWW.MODID, "machining"),
+			WWW.id("machining"),
 			new MachiningRecipe.Serializer()
+	);
+
+	public static final RecipeType<ElectrifyingRecipe> ELECTRIFYING = RecipeType.register(WWW.MODID + "electrifying");
+	public static final RecipeSerializer<ElectrifyingRecipe> ELECTRIFYING_SERIALIZER = Registry.register(
+			Registry.RECIPE_SERIALIZER,
+			WWW.id("electrifying"),
+			new ElectrifyingRecipe.Serializer()
 	);
 
 	public static void init(){}

@@ -3,7 +3,7 @@
   "lib39:discovered_via": "wacky_wonders:sparkelite",
   "pattern": [
     " # ",
-    "iSi",
+    "iRi",
     "XXX"
   ],
   "key": {
@@ -13,8 +13,8 @@
     "i": {
       "item": "minecraft:iron_ingot"
     },
-    "S": {
-      "item": "wacky_wonders:sparkelite"
+    "R": {
+      "item": "minecraft:redstone"
     },
     "X": {
       "item": "minecraft:stone"

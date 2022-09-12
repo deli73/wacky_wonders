@@ -6,6 +6,7 @@
   "mixins": [
     "AccessorAbstractFurnaceBlockEntity",
     "FixEnchantmentHelper",
+    "MixinItemEntity",
     "MixinLivingEntity",
     "MixinPunchEnchantment",
     "MixinQuickChargeEnchantment"
