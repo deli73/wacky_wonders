@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "lib39:discovered_via": "minecraft:glass",
+  "ingredient": {
+    "item": "minecraft:glass"
+  },
+  "result": "wacky_wonders:glass_lens",
+  "count": 2
+}

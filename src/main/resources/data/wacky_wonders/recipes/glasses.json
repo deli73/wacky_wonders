@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "lib39:discovered_via": "wacky_wonders:glass_lens",
+  "pattern": [
+    "# G",
+    "LNL"
+  ],
+  "key": {
+    "#": {
+      "item": "wacky_wonders:sparkelite_bottle"
+    },
+    "G": {
+      "item": "minecraft:ghast_tear"
+    },
+    "L": {
+      "item": "wacky_wonders:glass_lens"
+    },
+    "N": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "wacky_wonders:glasses",
+    "count": 1
+  }
+}

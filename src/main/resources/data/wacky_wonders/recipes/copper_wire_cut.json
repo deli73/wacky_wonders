@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "lib39:discovered_via": "minecraft:copper_ingot",
+  "ingredient": {
+    "item": "minecraft:copper_ingot"
+  },
+  "result": "wacky_wonders:copper_wire",
+  "count": 2
+}

@@ -3,6 +3,7 @@ package xyz.sunrose.wacky_wonders.items;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
@@ -22,6 +23,7 @@ public class WItems {
 			Registry.ITEM,  WWW.id("sparkelite"),
 			new Item(new QuiltItemSettings()
 					.group(WItemGroups.MATERIALS)
+					.rarity(Rarity.UNCOMMON)
 			)
 	);
 	// components
@@ -39,6 +41,24 @@ public class WItems {
 	);
 	public static final Item COPPER_WIRE = Registry.register(
 			Registry.ITEM,  WWW.id("copper_wire"),
+			new Item(new QuiltItemSettings()
+					.group(WItemGroups.MATERIALS)
+			)
+	);
+	public static final Item COPPER_COIL = Registry.register(
+			Registry.ITEM, WWW.id("copper_coil"),
+			new Item(new QuiltItemSettings()
+					.group(WItemGroups.MATERIALS)
+			)
+	);
+	public static final Item GLASS_LENS = Registry.register(
+			Registry.ITEM, WWW.id("glass_lens"),
+			new Item(new QuiltItemSettings()
+					.group(WItemGroups.MATERIALS)
+			)
+	);
+	public static final Item RUBBER = Registry.register(
+			Registry.ITEM, WWW.id("rubber"),
 			new Item(new QuiltItemSettings()
 					.group(WItemGroups.MATERIALS)
 			)
@@ -75,7 +95,6 @@ public class WItems {
 			new SpringBoxerItem(new QuiltItemSettings()
 					.group(WItemGroups.GADGETS)
 					.maxDamage(200)
-					.rarity(Rarity.UNCOMMON)
 			)
 	);
 
@@ -94,6 +113,15 @@ public class WItems {
 			)
 	);
 
+	public static final Item SHRINK_RAY = Registry.register(
+			Registry.ITEM, WWW.id("shrink_ray"),
+			new ShrinkRayItem(new QuiltItemSettings()
+					.group(WItemGroups.GADGETS)
+					.maxCount(1)
+					.rarity(Rarity.RARE)
+			)
+	);
+
 	// ???
 	public static final Item SPARKELITE_BOTTLE = Registry.register(
 			Registry.ITEM,  WWW.id("sparkelite_bottle"),
@@ -101,6 +129,26 @@ public class WItems {
 					.group(WItemGroups.ODDITIES)
 					.maxCount(4)
 					.recipeRemainder(Items.GLASS_BOTTLE)
+					.rarity(Rarity.RARE)
+			)
+	);
+
+	public static final Item GLASSES = Registry.register(
+			Registry.ITEM, WWW.id("glasses"),
+			new GlassesItem(new QuiltItemSettings()
+					.group(WItemGroups.ODDITIES)
+					.maxCount(1)
+					.equipmentSlot(EquipmentSlot.HEAD)
+			)
+	);
+
+	public static final Item WISP_BOTTLE = Registry.register(
+			Registry.ITEM, WWW.id("wisp_bottle"),
+			new Item(new QuiltItemSettings()
+					.group(WItemGroups.ODDITIES)
+					.maxCount(1)
+					.recipeRemainder(Items.GLASS_BOTTLE)
+					.rarity(Rarity.UNCOMMON)
 			)
 	);
 

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "lib39:discovered_via": "minecraft:slime_ball",
+  "pattern": [
+    "###",
+    "#F#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:slime_ball"
+    },
+    "F": {
+      "item": "minecraft:fire_charge"
+    }
+  },
+  "result": {
+    "item": "wacky_wonders:rubber",
+    "count": 8
+  }
+}

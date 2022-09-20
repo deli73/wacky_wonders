@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "wacky_wonders:glasses"
+    },
+    "title": "Fourth Eye",
+    "description": "Craft spectral spectacles",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "wacky_wonders:sparkelite",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wacky_wonders:glasses"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

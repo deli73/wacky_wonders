@@ -1,0 +1,10 @@
+{
+  "type": "wacky_wonders:machining",
+  "ingredient": {
+    "item": "minecraft:copper_ingot"
+  },
+  "result": {
+    "item": "wacky_wonders:copper_coil",
+    "count": 2
+  }
+}

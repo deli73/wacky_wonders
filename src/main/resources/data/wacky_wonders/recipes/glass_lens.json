@@ -1,0 +1,10 @@
+{
+  "type": "wacky_wonders:machining",
+  "ingredient": {
+    "item": "minecraft:glass"
+  },
+  "result": {
+    "item": "wacky_wonders:glass_lens",
+    "count": 2
+  }
+}

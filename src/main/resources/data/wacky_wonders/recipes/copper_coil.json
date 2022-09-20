@@ -1,0 +1,10 @@
+{
+  "type": "wacky_wonders:machining",
+  "ingredient": {
+    "item": "wacky_wonders:copper_wire"
+  },
+  "result": {
+    "item": "wacky_wonders:copper_coil",
+    "count": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "lib39:discovered_via": "minecraft:iron_ingot",
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": "wacky_wonders:screw",
+  "count": 2
+}

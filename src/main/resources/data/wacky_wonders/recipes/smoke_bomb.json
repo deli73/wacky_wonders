@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "lib39:discovered_via": "minecraft:gunpowder",
   "ingredients": [
     {
       "item": "minecraft:gunpowder"

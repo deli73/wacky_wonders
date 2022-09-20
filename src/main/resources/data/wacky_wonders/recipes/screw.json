@@ -1,0 +1,10 @@
+{
+  "type": "wacky_wonders:machining",
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": {
+    "item": "wacky_wonders:screw",
+    "count": 2
+  }
+}

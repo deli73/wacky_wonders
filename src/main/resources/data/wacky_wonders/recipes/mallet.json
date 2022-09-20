@@ -2,19 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "lib39:discovered_via": "wacky_wonders:rubber",
   "pattern": [
-    " # ",
-    "#S#"
+    " #S",
+    " /#",
+    "/  "
   ],
   "key": {
     "#": {
       "item": "wacky_wonders:rubber"
     },
     "S": {
-      "item": "minecraft:string"
+      "item": "wacky_wonders:screw"
+    },
+    "/": {
+      "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "wacky_wonders:boxing_glove",
+    "item": "wacky_wonders:mallet",
     "count": 1
   }
 }
