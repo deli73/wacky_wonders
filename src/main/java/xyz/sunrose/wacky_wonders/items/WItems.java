@@ -152,6 +152,11 @@ public class WItems {
 			)
 	);
 
+	// == INTERNAL ITEMS ==
+	public static final Item _WISP_ICON = Registry.register(
+			Registry.ITEM, WWW.id("icon_wisp"),
+			new Item(new QuiltItemSettings())
+	);
 
 	public static void init() {
 		WItemGroups.init();
