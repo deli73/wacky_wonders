@@ -12,6 +12,8 @@
     "MixinQuickChargeEnchantment"
   ],
   "client": [
+    "client.MixinMinecraftClient",
+    "client.MixinInGameHud"
   ],
   "injectors": {
     "defaultRequire": 1
