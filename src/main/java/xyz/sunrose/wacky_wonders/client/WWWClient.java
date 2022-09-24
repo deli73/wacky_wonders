@@ -22,7 +22,8 @@ public class WWWClient implements ClientModInitializer {
 	public static final NinePatch<Identifier> GLASSES_OVERLAY = NinePatch.builder(WWWClient.GLASES_OVERLAY_ID)
 			.cornerUv(5/64f).cornerSize(10).mode(NinePatch.Mode.STRETCHING).build();
 
-	public static final float GLASSES_GLOWING_RANGE = 64;
+	public static final float GLASSES_GLOWING_RANGE = 16;
+	public static final float GLASSES_GLOWING_RANGE_NV = 32;
 
 	@Override
 	public void onInitializeClient(ModContainer mod) {

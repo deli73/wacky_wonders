@@ -3,7 +3,6 @@ package xyz.sunrose.wacky_wonders.mixins.client;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,13 +23,14 @@ public class MixinMinecraftClient {
 
 	@Inject(method = "hasOutline", at = @At("RETURN"), cancellable = true)
 	private void injectOutline(Entity entity, CallbackInfoReturnable<Boolean> cir) {
-		if(this.player != null
-				&& this.player.getInventory().getArmorStack(PlayerInventory.HELMET_SLOTS[0]).getItem() == WItems.GLASSES
-				&& this.player.hasStatusEffect(StatusEffects.NIGHT_VISION)
-				&& entity instanceof MobEntity
-				&& entity.distanceTo(this.player) < WWWClient.GLASSES_GLOWING_RANGE
-		) {
-			cir.setReturnValue(true);
+		if(this.player != null) {
+			// range longer if player has night vision
+			float range = this.player.hasStatusEffect(StatusEffects.NIGHT_VISION) ? WWWClient.GLASSES_GLOWING_RANGE_NV : WWWClient.GLASSES_GLOWING_RANGE;
+			if (this.player.getInventory().getArmorStack(PlayerInventory.HELMET_SLOTS[0]).getItem() == WItems.GLASSES
+					&& entity instanceof MobEntity && entity.distanceTo(this.player) < range
+			) { //if the player has the glasses on, and the entity is a mob that's within range, it glows
+				cir.setReturnValue(true);
+			}
 		}
 	}
 }

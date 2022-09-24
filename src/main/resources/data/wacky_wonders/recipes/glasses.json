@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "lib39:discovered_via": "wacky_wonders:glass_lens",
   "pattern": [
-    "# G",
+    "G #",
     "LNL"
   ],
   "key": {
