@@ -32,7 +32,7 @@ public class WWW implements ModInitializer {
 				"Cartoon logic!", "Spring-loaded!", "Yeetable!", "Stimmy!", "Hackable!", "Wacky!", "Whimsical!",
 				"Ghost-powered!", "Supercharged!", "Explosive!", "Like a ninja!", "Tiny!", "Not a parasite!",
 				"Lathes are dangerous!", "First-order retrievabiity!", "Myth BUSTED", "Engineering!",
-				"Drone racing!", "Nope!", "The Flattening!",
+				"Drone racing!", "Nope!", "The Flattening!", "Fizzy drinks!", "Wonderful!", "Elastic!",
 				"Also try Raft!", "Also try Marble It Up!", "Also try Hyperbolica!", "Also try Garry's Mod!",
 				"I Can't Believe It's Not Necromancy!™" // Credit to Auries for this one
 		);
